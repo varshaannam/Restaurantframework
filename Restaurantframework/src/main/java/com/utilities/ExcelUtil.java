@@ -1,0 +1,51 @@
+package com.utilities;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class ExcelUtil {
+	public final static String currentDir = System.getProperty("user.dir");
+	public static String filePath = currentDir + ".//src/test//resources//restaurantdata.xlsx";
+
+	static XSSFWorkbook workbook;
+	static XSSFSheet sheet;
+	static FileInputStream fs;
+	File file = new File(filePath);
+
+	public ExcelUtil() throws IOException {
+		workbook = new XSSFWorkbook(filePath);
+		sheet = workbook.getSheetAt(0);
+	}
+
+	public void getNumberOfRows() throws IOException {
+		fs = new FileInputStream(file);
+		workbook = new XSSFWorkbook(fs);
+		sheet = workbook.getSheetAt(0);
+		int rowCount = sheet.getPhysicalNumberOfRows();
+		System.out.println(rowCount);
+	}
+
+	public String readStringData(String sheetname, int rowNum, int colNum) throws IOException {
+
+		fs = new FileInputStream(file);
+		workbook = new XSSFWorkbook(fs);
+		sheet = workbook.getSheet(sheetname);
+		String cellValue = sheet.getRow(rowNum - 1).getCell(colNum - 1).getStringCellValue();
+		return cellValue;
+	}
+
+	public int readNumericData(int rowNum, int colNum) throws IOException {
+
+		fs = new FileInputStream(file);
+		workbook = new XSSFWorkbook(fs);
+		sheet = workbook.getSheetAt(0);
+		int cellValue = (int) sheet.getRow(rowNum).getCell(colNum).getNumericCellValue();
+		return cellValue;
+	}
+
+}
+
+
