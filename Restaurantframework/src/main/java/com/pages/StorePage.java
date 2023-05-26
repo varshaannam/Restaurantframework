@@ -12,6 +12,11 @@ public class StorePage {
 	WebDriver driver;
 	WebElementUtils elementutil = new WebElementUtils();
 	WebPageutils pageutil = new WebPageutils();
+	public StorePage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+
 	@FindBy(xpath = "//span[text()='Stores']")
 	WebElement storelink;
 	@FindBy(xpath = "//button[@class='btn btn-add btn-lg']")
@@ -51,11 +56,7 @@ public class StorePage {
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
 	WebElement Storeedit_action;
 
-	public StorePage(WebDriver driver) {
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
-	}
-
+	
 	public boolean isStoreDisplayed() {
 		boolean flag = elementutil.isElementDisplayed(driver, storelink);
 		return flag;

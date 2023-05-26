@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.BeforeGroups;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
@@ -17,13 +19,13 @@ import com.utilities.BrowserUtils;
 import com.utilities.PropertyUtil;
 
 public class AutomationBase {
-	static WebDriver driver;
+	public WebDriver driver;
 	BrowserUtils browser;
 	LoginPage lpage;
 	PropertyUtil propertyutil;
 	Properties prop;
 
-	@BeforeTest
+	@BeforeMethod
 	@Parameters("browserName")
 
 	public void preLaunch(String browserName) {
@@ -32,11 +34,20 @@ public class AutomationBase {
 		lpage = new LoginPage(driver);
 		browser = new BrowserUtils();
 		propertyutil = new PropertyUtil();
-		try {
-			prop = propertyutil.getProperty("config.properties");
-		} catch (IOException e) {
-			throw new RuntimeException("unable to load config file");
-		}
+		prop = propertyutil.getProperty("config.properties");
+		browser.launchtheURL(driver, prop.getProperty("url"));
+
+	}
+
+	@BeforeGroups("Smoke")
+	@Parameters("browserName")
+
+	public void grouping(String browserName) {
+		launchBrowser(browserName);
+		lpage = new LoginPage(driver);
+		browser = new BrowserUtils();
+		propertyutil = new PropertyUtil();
+		prop = propertyutil.getProperty("config.properties");
 		browser.launchtheURL(driver, prop.getProperty("url"));
 
 	}
@@ -60,10 +71,10 @@ public class AutomationBase {
 	private void launchChromeBrowser() {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
-		//browser.fullSCreenWindow(driver);
-		//ChromeOptions ops = new ChromeOptions();
-		//ops.addArguments("--remote-allow-origins=*");
-		//WebDriver driver = new ChromeDriver(ops);
+		// browser.fullSCreenWindow(driver);
+		// ChromeOptions ops = new ChromeOptions();
+		// ops.addArguments("--remote-allow-origins=*");
+		// WebDriver driver = new ChromeDriver(ops);
 	}
 
 	private void launchEdgeBrowser() {
@@ -80,8 +91,4 @@ public class AutomationBase {
 
 	}
 
-	public static WebDriver getDriver() // to return the driver
-	{
-		return driver;
-	}
 }

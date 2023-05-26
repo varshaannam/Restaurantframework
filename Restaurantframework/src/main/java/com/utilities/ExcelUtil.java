@@ -1,6 +1,7 @@
 package com.utilities;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -15,37 +16,48 @@ public class ExcelUtil {
 	static FileInputStream fs;
 	File file = new File(filePath);
 
-	public ExcelUtil() throws IOException {
-		workbook = new XSSFWorkbook(filePath);
+	public ExcelUtil()  {
+		try {
+			workbook = new XSSFWorkbook(filePath);
+		} catch (IOException e) {
+			throw new RuntimeException("Error during reading filepath");
+		}
 		sheet = workbook.getSheetAt(0);
 	}
 
-	public void getNumberOfRows() throws IOException {
-		fs = new FileInputStream(file);
-		workbook = new XSSFWorkbook(fs);
+	public void getNumberOfRows() {
+		try {
+			fs = new FileInputStream(file);
+			workbook = new XSSFWorkbook(fs);
+		} catch (IOException e) {
+			throw new RuntimeException("Error during reading file");
+		}
 		sheet = workbook.getSheetAt(0);
 		int rowCount = sheet.getPhysicalNumberOfRows();
 		System.out.println(rowCount);
 	}
 
-	public String readStringData(String sheetname, int rowNum, int colNum) throws IOException {
-
-		fs = new FileInputStream(file);
-		workbook = new XSSFWorkbook(fs);
+	public String readStringData(String sheetname, int rowNum, int colNum) {
+		try {
+			fs = new FileInputStream(file);
+			workbook = new XSSFWorkbook(fs);
+		} catch (IOException e) {
+			throw new RuntimeException("Error during reading file");
+		}
 		sheet = workbook.getSheet(sheetname);
 		String cellValue = sheet.getRow(rowNum - 1).getCell(colNum - 1).getStringCellValue();
 		return cellValue;
 	}
 
-	public int readNumericData(int rowNum, int colNum) throws IOException {
-
-		fs = new FileInputStream(file);
-		workbook = new XSSFWorkbook(fs);
-		sheet = workbook.getSheetAt(0);
+	public int readNumericData(String sheetname, int rowNum, int colNum) {
+		try {
+			fs = new FileInputStream(file);
+			workbook = new XSSFWorkbook(fs);
+		} catch (IOException e) {
+			throw new RuntimeException("Error during reading file");
+		}
+		sheet = workbook.getSheet(sheetname);
 		int cellValue = (int) sheet.getRow(rowNum).getCell(colNum).getNumericCellValue();
 		return cellValue;
 	}
-
 }
-
-

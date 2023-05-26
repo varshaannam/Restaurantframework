@@ -1,9 +1,7 @@
 package com.test;
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -14,23 +12,18 @@ import com.pages.LoginPage;
 import com.utilities.PropertyUtil;
 
 public class HomePageTest extends  AutomationBase {
-	WebDriver driver;
 	LoginPage lpage;
 	HomePage hpage;
 	Properties prop;
 	PropertyUtil propertyutil;
 
-	@BeforeMethod
-	public void preRun() throws Exception {
-		driver = getDriver();
+	@Test(priority = 2, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+
+	public void validateTheMenuItemsDisplayedOntheHomepage()  {
 		propertyutil = new PropertyUtil();
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
-	}
-
-	@Test
-	public void validateTheMenuItemsDisplayedOntheHomepage() throws IOException {
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(hpage.isPosLinkDisplayed(), AutomationConstants.LinkDisplayCheck);
 		soft.assertTrue(hpage.isProductDisplayed(), AutomationConstants.LinkDisplayCheck);

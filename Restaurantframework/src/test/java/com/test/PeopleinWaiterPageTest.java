@@ -30,24 +30,19 @@ public class PeopleinWaiterPageTest extends AutomationBase {
 	PropertyUtil propertyutil = new PropertyUtil();
 	BrowserUtils browser = new BrowserUtils();
 
-	@BeforeMethod
-	public void preRun() throws Exception {
-		driver = getDriver();
+	
+
+	@Test(priority = 1, enabled = true)
+	public void validateElementsOnwaiter()  {
 		lpage = new LoginPage(driver);
 		wait = new WaitUtils();
 		supplier = new DataSupplier();
 		excelutil = new ExcelUtil();
-
 		prop = propertyutil.getProperty("config.properties");
 		browser.launchtheURL(driver, prop.getProperty("url"));
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		epage = hpage.navigateToPeopleinWaiterPage();
-
-	}
-
-	@Test(priority = 1, enabled = true)
-	public void validateElementsOnwaiter() throws InterruptedException {
 		epage.clickOnWaitersElement();
 		epage.clickOnAddwaitElement();
 		SoftAssert soft = new SoftAssert();
@@ -60,14 +55,24 @@ public class PeopleinWaiterPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 2, enabled = true, dataProvider = "dataProvider", dataProviderClass = DataSupplier.class)
-	public void validateAddwaiterFunctionality(String name, String phonenum, String mail) throws InterruptedException {
+	public void validateAddwaiterFunctionality(String name, String phonenum, String mail,String discount)  {
+		lpage = new LoginPage(driver);
+		wait = new WaitUtils();
+		supplier = new DataSupplier();
+		excelutil = new ExcelUtil();
+		prop = propertyutil.getProperty("config.properties");
+		browser.launchtheURL(driver, prop.getProperty("url"));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
+		epage = hpage.navigateToPeopleinWaiterPage();
+
 
 		epage.clickOnWaitersElement();
 		epage.clickOnAddwaitElement();
 		epage.enterNameOfWaiter("name");
 		epage.enterPhonenumberOfwaiter("phonenum");
 		epage.enterEmailOfwaiter("mail");
-		epage.selecttStoreOfWaiter("D4");
+		epage.selecttStoreOfWaiter("discount");
 		epage.submitofWaiter();
 		wait.ElementTobeClickable(driver, epage.waiter_submit, 30);
 
@@ -87,6 +92,16 @@ public class PeopleinWaiterPageTest extends AutomationBase {
 
 	@Test(priority = 3, enabled = true)
 	public void validatedeletewaiterFunctionality() {
+		lpage = new LoginPage(driver);
+		wait = new WaitUtils();
+		supplier = new DataSupplier();
+		excelutil = new ExcelUtil();
+		prop = propertyutil.getProperty("config.properties");
+		browser.launchtheURL(driver, prop.getProperty("url"));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
+		epage = hpage.navigateToPeopleinWaiterPage();
+
 
 		epage.clickOnWaitersElement();
 		epage.clickOnAddwaitElement();
@@ -104,6 +119,16 @@ public class PeopleinWaiterPageTest extends AutomationBase {
 
 	@Test(priority = 4, enabled = true)
 	public void validateEditwaiterFunctionality() {
+		lpage = new LoginPage(driver);
+		wait = new WaitUtils();
+		supplier = new DataSupplier();
+		excelutil = new ExcelUtil();
+		prop = propertyutil.getProperty("config.properties");
+		browser.launchtheURL(driver, prop.getProperty("url"));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
+		epage = hpage.navigateToPeopleinWaiterPage();
+
 
 		epage.clickOnWaitersElement();
 		epage.clickOnAddwaitElement();

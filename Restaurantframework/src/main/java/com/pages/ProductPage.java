@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.utilities.WaitUtils;
 import com.utilities.WebElementUtils;
 import com.utilities.WebPageutils;
 
@@ -12,6 +13,11 @@ public class ProductPage {
 	WebDriver driver;
 	WebElementUtils elementutil = new WebElementUtils();
 	WebPageutils pageutil = new WebPageutils();
+	WaitUtils waitutil = new WaitUtils();
+	public ProductPage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
 	@FindBy(xpath = "//span[text()='Product']")
 	WebElement productlink;
 	@FindBy(xpath = "//button[text()='Add Product']")
@@ -80,10 +86,8 @@ public class ProductPage {
 	WebElement modifyStock_action;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	WebElement invalidsearchresult;
-
-	public ProductPage(WebDriver driver) {
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
+	public void implementImplicitWait() {
+		waitutil.implicitwait(driver, 5);
 	}
 
 	public boolean isProductLinkDisplayed() {

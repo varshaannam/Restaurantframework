@@ -14,6 +14,10 @@ public class ExpensePage {
 	WebDriver driver;
 	WebElementUtils  elementutil = new WebElementUtils();
 	WebPageutils pageutil = new WebPageutils();
+	public ExpensePage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
 	@FindBy(xpath = "//span[text()='Expense']")
 	WebElement expenselink;
 	@FindBy(xpath = "//button[@class='btn btn-add btn-lg']")
@@ -52,12 +56,7 @@ public class ExpensePage {
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	WebElement invalidsearchresult;
 
-	public ExpensePage(WebDriver driver) {
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
-	}
-
-	public void clickOnAddexpenseElement() {
+		public void clickOnAddexpenseElement() {
 		elementutil.clickOnElement(driver, addexpense);
 	}
 

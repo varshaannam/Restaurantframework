@@ -10,6 +10,10 @@ import com.utilities.WebElementUtils;
 public class LoginPage {
 	WebDriver driver;
 	WebElementUtils elementutil = new WebElementUtils();
+	public LoginPage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
 	@FindBy(xpath = "//input[@name='username']")
 	WebElement username;
 	@FindBy(xpath = "//input[@name='password']")
@@ -17,11 +21,7 @@ public class LoginPage {
 	@FindBy(xpath = "//input[@name='submit']")
 	WebElement login;
 
-	public LoginPage(WebDriver driver) {
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
-	}
-
+	
 	public void enterValuetoUsername(String name) {
 		elementutil.enterValueToTheElement(driver, username, name);
 	}
@@ -39,13 +39,13 @@ public class LoginPage {
 		return flag;
 	}
 
-	public void performlogin(String username, String password) throws Exception {
+	public void performlogin(String username, String password) {
 		enterValuetoUsername(username);
 		enterValuetopassword(password);
 		clickOnLogin();
 	}
 
-	public HomePage login(String username, String password) throws Exception {
+	public HomePage login(String username, String password)  {
 		enterValuetoUsername(username);
 		enterValuetopassword(password);
 		clickOnLogin();

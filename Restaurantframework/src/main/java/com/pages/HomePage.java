@@ -38,6 +38,11 @@ public class HomePage {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
+	/**
+	 * This method is to check whether elements are displayed
+	 * 
+	 * @return
+	 */
 
 	public boolean isPosLinkDisplayed() {
 		boolean flag = elementutil.isElementDisplayed(driver, poslink);
@@ -93,6 +98,11 @@ public class HomePage {
 		boolean flag = elementutil.isElementDisplayed(driver, logout);
 		return flag;
 	}
+	/**
+	 * This methods are used to navigate to corresponding pages
+	 * 
+	 * @return
+	 */
 
 	public void navigatedToPosMenu() {
 		elementutil.clickOnElement(driver, poslink);
@@ -149,45 +159,45 @@ public class HomePage {
 
 	}
 
-	public ProductPage navigateToproductPage() throws Exception {
+	public ProductPage navigateToproductPage()  {
 		navigatedToProductMenu();
 		return new ProductPage(driver);
 
 	}
 
-	public StorePage navigateTostorePage() throws Exception {
+	public StorePage navigateTostorePage()  {
 		navigatedToStoreMenu();
 		return new StorePage(driver);
 	}
 
-	public PeopleinWaiterPage navigateToPeopleinWaiterPage() throws Exception {
+	public PeopleinWaiterPage navigateToPeopleinWaiterPage()  {
 		navigatedToPeopleMenu();
 		return new PeopleinWaiterPage(driver);
 
 	}
 
-	public PeopleinCustomerPage navigateToPeopleinCustomerPage() throws Exception {
+	public PeopleinCustomerPage navigateToPeopleinCustomerPage()  {
 		navigatedToPeopleMenu();
 		return new PeopleinCustomerPage(driver);
 
 	}
 
-	public PeopleinSupplierPage navigateToPeopleinSupplierrPage() throws Exception {
+	public PeopleinSupplierPage navigateToPeopleinSupplierrPage() {
 		navigatedToPeopleMenu();
 		return new PeopleinSupplierPage(driver);
 	}
 
-	public ExpensePage navigateToExpensePage() throws Exception {
+	public ExpensePage navigateToExpensePage()  {
 		navigatedToPeopleMenu();
 		return new ExpensePage(driver);
 	}
 
-	public LogoutPage navigateToLogoutPage() throws Exception {
+	public LogoutPage navigateToLogoutPage() {
 		navigatedTologoutMenu();
 		return new LogoutPage(driver);
 	}
 
-	public SettingPage navigateToSettingPage() throws Exception {
+	public SettingPage navigateToSettingPage()  {
 		navigatedToSettingMenu();
 		return new SettingPage(driver);
 	}

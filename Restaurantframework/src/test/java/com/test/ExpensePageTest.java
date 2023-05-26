@@ -21,36 +21,30 @@ import com.utilities.WaitUtils;
 
 
 public class ExpensePageTest extends AutomationBase {
-	WebDriver driver;
 	LoginPage lpage;
 	HomePage hpage;
 	ExpensePage npage;
 	Properties prop;
 	WaitUtils wait;
 	ExcelUtil excelutil;
-
-	PropertyUtil propertyutil = new PropertyUtil();
+	PropertyUtil propertyutil;
 	BrowserUtils browser = new BrowserUtils();
 
-	@BeforeMethod
-	public void preRun() throws Exception {
-		driver = getDriver();
-		// hpage=new HomePage(driver);
+	
+	@Test(priority = 1, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validateElementsOnExpense()  {
+		
 		lpage = new LoginPage(driver);
-		// hpage=new HomePage(driver);
+		hpage = new HomePage(driver);
 		wait = new WaitUtils();
-		excelutil = new ExcelUtil();
-
+		//excelutil = new ExcelUtil();
+		propertyutil = new PropertyUtil();
 		prop = propertyutil.getProperty("config.properties");
-		browser.launchtheURL(driver, prop.getProperty("url"));
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+		//browser.launchtheURL(driver, prop.getProperty("url"));
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		npage = hpage.navigateToExpensePage();
-
-	}
-
-	@Test(priority = 1, enabled = true)
-	public void validateElementsOnExpense() throws InterruptedException {
+		excelutil = new ExcelUtil();
 		npage.clickOnExpenseElement();
 		npage.clickOnAddExpenseElement();
 		SoftAssert soft = new SoftAssert();
@@ -63,8 +57,19 @@ public class ExpensePageTest extends AutomationBase {
 
 	}
 
-	@Test(priority = 2, enabled = true)
-	public void validateAddexpenseFunctionality() throws InterruptedException, IOException {
+	@Test(priority = 2, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validateAddexpenseFunctionality()  {
+		lpage = new LoginPage(driver);
+		hpage = new HomePage(driver);
+		wait = new WaitUtils();
+		//excelutil = new ExcelUtil();
+		propertyutil = new PropertyUtil();
+		prop = propertyutil.getProperty("config.properties");
+		//browser.launchtheURL(driver, prop.getProperty("url"));
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
+		npage = hpage.navigateToExpensePage();
+		excelutil = new ExcelUtil();
 		npage.clickOnExpenseElement();
 		npage.clickOnAddExpenseElement();
 		String expensedate = excelutil.readStringData("expense", 1, 2);
@@ -95,8 +100,20 @@ public class ExpensePageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 3, enabled = true)
-	public void validatedeleteExpenseFunctionality() throws IOException {
+	@Test(priority = 3, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validatedeleteExpenseFunctionality() {
+		lpage = new LoginPage(driver);
+		hpage = new HomePage(driver);
+		wait = new WaitUtils();
+		//excelutil = new ExcelUtil();
+		propertyutil = new PropertyUtil();
+		prop = propertyutil.getProperty("config.properties");
+		//browser.launchtheURL(driver, prop.getProperty("url"));
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
+		npage = hpage.navigateToExpensePage();
+		excelutil = new ExcelUtil();
+		
 		npage.clickOnExpenseElement();
 		npage.clickOnAddExpenseElement();
 		String expensedate = excelutil.readStringData("expense", 6, 2);
@@ -117,8 +134,19 @@ public class ExpensePageTest extends AutomationBase {
 		Assert.assertTrue(npage.isInvalidresultFromSearch());
 	}
 
-	@Test(priority = 4, enabled = true)
-	public void validateEditExpenseFunctionality() throws IOException {
+	@Test(priority = 4, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	public void validateEditExpenseFunctionality()  {
+		lpage = new LoginPage(driver);
+		hpage = new HomePage(driver);
+		wait = new WaitUtils();
+		//excelutil = new ExcelUtil();
+		propertyutil = new PropertyUtil();
+		prop = propertyutil.getProperty("config.properties");
+		//browser.launchtheURL(driver, prop.getProperty("url"));
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
+		npage = hpage.navigateToExpensePage();
+		excelutil = new ExcelUtil();
 		npage.clickOnExpenseElement();
 		npage.clickOnAddExpenseElement();
 		String expensedate = excelutil.readStringData("expense", 11, 2);

@@ -30,24 +30,18 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 	PropertyUtil propertyutil = new PropertyUtil();
 	BrowserUtils browser = new BrowserUtils();
 
-	@BeforeMethod
-	public void preRun() throws Exception {
-		driver = getDriver();
-		// hpage=new HomePage(driver);
+	
+	@Test(priority = 1, enabled = true)
+	public void validateElementsOnSupplier()  {
 		lpage = new LoginPage(driver);
-		// hpage=new HomePage(driver);
 		excelutil = new ExcelUtil();
-
 		prop = propertyutil.getProperty("config.properties");
 		browser.launchtheURL(driver, prop.getProperty("url"));
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		spage = hpage.navigateToPeopleinSupplierrPage();
 
-	}
-
-	@Test(priority = 1, enabled = true)
-	public void validateElementsOnSupplier() throws InterruptedException {
+		
 		spage.clickOnSupplierElement();
 		spage.clickOnAddSupplierElement();
 		SoftAssert soft = new SoftAssert();
@@ -60,7 +54,7 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 2, enabled = true)
-	public void validateAddsupplierFunctionality() throws IOException {
+	public void validateAddsupplierFunctionality() {
 		spage.clickOnSupplierElement();
 		spage.clickOnAddSupplierElement();
 		String suppliername = excelutil.readStringData("supplier", 1, 2);
@@ -83,7 +77,7 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 3, enabled = true)
-	public void validatedeletsupplierFunctionality() throws IOException {
+	public void validatedeletsupplierFunctionality()  {
 		spage.clickOnSupplierElement();
 		spage.clickOnAddSupplierElement();
 		String suppliername2 = excelutil.readStringData("supplier", 4, 2);
@@ -100,7 +94,7 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 4, enabled = true)
-	public void validateEditSupplierFunctionality() throws IOException {
+	public void validateEditSupplierFunctionality()  {
 		spage.clickOnSupplierElement();
 		spage.clickOnAddSupplierElement();
 		String suppliername3 = excelutil.readStringData("customer", 7, 2);

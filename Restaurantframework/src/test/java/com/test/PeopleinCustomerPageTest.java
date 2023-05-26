@@ -29,24 +29,17 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 	PropertyUtil propertyutil = new PropertyUtil();
 	BrowserUtils browser = new BrowserUtils();
 
-	@BeforeMethod
-	public void preRun() throws Exception {
-		driver = getDriver();
-		// hpage=new HomePage(driver);
+	
+
+	@Test(priority = 1, enabled = true)
+	public void validateElementsOncustomer()  {
 		lpage = new LoginPage(driver);
-		// hpage=new HomePage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		browser.launchtheURL(driver, prop.getProperty("url"));
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		cpage = hpage.navigateToPeopleinCustomerPage();
 		excelutil = new ExcelUtil();
-
-
-	}
-
-	@Test(priority = 1, enabled = true)
-	public void validateElementsOncustomer() throws InterruptedException {
 		cpage.clickOnCustomersElement();
 		cpage.clickOnAddCustomerElement();
 		SoftAssert soft = new SoftAssert();
@@ -60,7 +53,14 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 2, enabled = true)
-	public void validateAddcustomerFunctionality() throws IOException {
+	public void validateAddcustomerFunctionality()  {
+		lpage = new LoginPage(driver);
+		prop = propertyutil.getProperty("config.properties");
+		browser.launchtheURL(driver, prop.getProperty("url"));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
+		cpage = hpage.navigateToPeopleinCustomerPage();
+		excelutil = new ExcelUtil();
 		cpage.clickOnCustomersElement();
 		cpage.clickOnAddCustomerElement();
 		String customername = excelutil.readStringData("customer", 1, 2);
@@ -88,6 +88,13 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 
 	@Test(priority = 3, enabled = true)
 	public void validatedeletcustomerFunctionality() throws IOException {
+		lpage = new LoginPage(driver);
+		prop = propertyutil.getProperty("config.properties");
+		browser.launchtheURL(driver, prop.getProperty("url"));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
+		cpage = hpage.navigateToPeopleinCustomerPage();
+		excelutil = new ExcelUtil();
 		cpage.clickOnCustomersElement();
 		cpage.clickOnAddCustomerElement();
 		String customername2 = excelutil.readStringData("customer", 5, 2);
@@ -106,7 +113,14 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 4, enabled = true)
-	public void validateEditCustomerFunctionality() throws IOException {
+	public void validateEditCustomerFunctionality()  {
+		lpage = new LoginPage(driver);
+		prop = propertyutil.getProperty("config.properties");
+		browser.launchtheURL(driver, prop.getProperty("url"));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
+		cpage = hpage.navigateToPeopleinCustomerPage();
+		excelutil = new ExcelUtil();
 
 		cpage.clickOnCustomersElement();
 		cpage.clickOnAddCustomerElement();

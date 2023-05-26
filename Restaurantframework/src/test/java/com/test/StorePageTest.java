@@ -18,7 +18,7 @@ import com.utilities.PropertyUtil;
 import com.utilities.WaitUtils;
 
 public class StorePageTest extends AutomationBase {
-	WebDriver driver;
+	
 	LoginPage lpage;
 	HomePage hpage;
 	StorePage spage;
@@ -28,21 +28,15 @@ public class StorePageTest extends AutomationBase {
 	PropertyUtil propertyutil = new PropertyUtil();
 	BrowserUtils browser = new BrowserUtils();
 
-	@BeforeMethod
-	public void preRun() throws Exception {
-		driver = getDriver();
+	@Test(priority = 1, enabled = true,groups= {"Smoke"})
+	public void validateElementsOnStore() {
 		lpage = new LoginPage(driver);
-		wait = new WaitUtils();
-		excelutil = new ExcelUtil();
-
 		prop = propertyutil.getProperty("config.properties");
+		excelutil = new ExcelUtil();
+		wait = new WaitUtils();
 		wait.implicitwait(driver, 30);
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		spage = hpage.navigateTostorePage();
-	}
-
-	@Test(priority = 1, enabled = true)
-	public void validateElementsOnStore() {
 		spage.clickOnAddStore();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(spage.isAddStoreDisplayed(), "Failure message:addstore is not displayed");
@@ -55,8 +49,15 @@ public class StorePageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 2, enabled = true)
-	public void validateAddStoreFunctionality() throws IOException {
+	@Test(priority = 2, enabled = true,groups= {"Smoke"})
+	public void validateAddStoreFunctionality()  {
+		lpage = new LoginPage(driver);
+		prop = propertyutil.getProperty("config.properties");
+		excelutil = new ExcelUtil();
+		wait = new WaitUtils();
+		wait.implicitwait(driver, 30);
+		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
+		spage = hpage.navigateTostorePage();
 		spage.clickOnAddStore();
 		String storename = excelutil.readStringData("store", 1, 2);
 		spage.enterNameOfStore(storename);
@@ -87,8 +88,17 @@ public class StorePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 3, enabled = true)
-	public void validateDeleteActionOnStore() throws InterruptedException, IOException {
+	public void validateDeleteActionOnStore()  {
+		lpage = new LoginPage(driver);
+		prop = propertyutil.getProperty("config.properties");
+		excelutil = new ExcelUtil();
+		wait = new WaitUtils();
+		wait.implicitwait(driver, 30);
+		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
+		spage = hpage.navigateTostorePage();
 		spage.clickOnAddStore();
+
+		//spage.clickOnAddStore();
 		String storename = excelutil.readStringData("store", 7, 2);
 		spage.enterNameOfStore(storename);
 		String storemail = excelutil.readStringData("store", 8, 2);
@@ -110,8 +120,17 @@ public class StorePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 4, enabled = true)
-	public void validateEditActionOnStore() throws InterruptedException, IOException {
+	public void validateEditActionOnStore()  {
+		lpage = new LoginPage(driver);
+		prop = propertyutil.getProperty("config.properties");
+		excelutil = new ExcelUtil();
+		wait = new WaitUtils();
+		wait.implicitwait(driver, 30);
+		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
+		spage = hpage.navigateTostorePage();
 		spage.clickOnAddStore();
+
+		
 		String storename = excelutil.readStringData("store", 13, 2);
 		spage.enterNameOfStore(storename);
 		String storemail = excelutil.readStringData("store", 14, 2);
