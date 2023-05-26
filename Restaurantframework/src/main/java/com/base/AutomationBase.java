@@ -34,7 +34,7 @@ public class AutomationBase {
 		lpage = new LoginPage(driver);
 		browser = new BrowserUtils();
 		propertyutil = new PropertyUtil();
-prop = propertyutil.getProperty("config.properties");
+		prop = propertyutil.getProperty("config.properties");
 		browser.launchtheURL(driver, prop.getProperty("url"));
 
 	}
