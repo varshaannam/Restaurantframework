@@ -5,25 +5,24 @@
 		<listener class-name="com.listeners.TestListeners" />
 	</listeners>
 	<test name="ChromeTest">
-		<parameter name="browserName" value="Chrome"></parameter>
+		<parameter name="browserName" value="Chrome" />
 		<classes>
 			<class name="com.test.LoginPageTest" />
 		</classes>
 	</test>
-	<test name="EdgeTest">
-		<parameter name="browserName" value="Edge"></parameter>
-		<classes>
-			<class name="com.test.LoginPageTest" />
-		</classes>
-	</test>
+	<!-- Test -->
 	<test name="FirefoxTest">
-		<parameter name="browserName" value="Firefox"></parameter>
-
+		<parameter name="browserName" value="Firefox" />
 		<classes>
 			<class name="com.test.LoginPageTest" />
-
 		</classes>
 	</test>
-
-</suite> 
-
+	<!-- Test -->
+	<test name="EdgeTest">
+		<parameter name="browserName" value="Edge" />
+		<classes>
+			<class name="com.test.LoginPageTest" />
+		</classes>
+	</test>
+	<!-- Test -->
+</suite> <!-- Suite -->
