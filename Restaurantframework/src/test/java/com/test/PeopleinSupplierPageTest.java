@@ -1,23 +1,20 @@
 package com.test;
-import java.io.IOException;
+
 import java.time.Duration;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.base.AutomationBase;
 import com.pages.HomePage;
 import com.pages.LoginPage;
-import com.pages.PeopleinCustomerPage;
 import com.pages.PeopleinSupplierPage;
 import com.utilities.BrowserUtils;
 import com.utilities.ExcelUtil;
 import com.utilities.PropertyUtil;
-
 
 public class PeopleinSupplierPageTest extends AutomationBase {
 	WebDriver driver;
@@ -26,13 +23,11 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 	PeopleinSupplierPage spage;
 	Properties prop;
 	ExcelUtil excelutil;
-
 	PropertyUtil propertyutil = new PropertyUtil();
 	BrowserUtils browser = new BrowserUtils();
 
-	
 	@Test(priority = 1, enabled = true)
-	public void validateElementsOnSupplier()  {
+	public void validateElementsOnSupplier() {
 		lpage = new LoginPage(driver);
 		excelutil = new ExcelUtil();
 		prop = propertyutil.getProperty("config.properties");
@@ -40,8 +35,6 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		spage = hpage.navigateToPeopleinSupplierrPage();
-
-		
 		spage.clickOnSupplierElement();
 		spage.clickOnAddSupplierElement();
 		SoftAssert soft = new SoftAssert();
@@ -77,7 +70,7 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 3, enabled = true)
-	public void validatedeletsupplierFunctionality()  {
+	public void validatedeletsupplierFunctionality() {
 		spage.clickOnSupplierElement();
 		spage.clickOnAddSupplierElement();
 		String suppliername2 = excelutil.readStringData("supplier", 4, 2);
@@ -94,7 +87,7 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 4, enabled = true)
-	public void validateEditSupplierFunctionality()  {
+	public void validateEditSupplierFunctionality() {
 		spage.clickOnSupplierElement();
 		spage.clickOnAddSupplierElement();
 		String suppliername3 = excelutil.readStringData("customer", 7, 2);
@@ -108,7 +101,6 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 		spage.EditActiononSupplier();
 		spage.clearActionOnSuppliername();
 		String suppliername4 = excelutil.readStringData("customer", 10, 2);
-
 		spage.enterNameOfSupplier("suppliername4");
 		spage.submitofsupplier();
 		spage.enterSearchofsupplierElement("suppliername4");
@@ -123,6 +115,3 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 	}
 
 }
-
-
-

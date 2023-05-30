@@ -12,22 +12,19 @@ import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.utilities.PropertyUtil;
 
-public class LoginPageTest  extends AutomationBase {
+public class LoginPageTest extends AutomationBase {
 	LoginPage lpage;
 	HomePage hpage;
 	Properties prop;
 	PropertyUtil propertyutil;
 
-	@Test(priority = 1,enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 1, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateLogin() throws Exception {
 		lpage = new LoginPage(driver);
 		hpage = new HomePage(driver);
 		propertyutil = new PropertyUtil();
 		prop = propertyutil.getProperty("config.properties");
 		lpage.performlogin(prop.getProperty("username"), prop.getProperty("password"));
-        Assert.assertTrue(hpage.isProductDisplayed(), AutomationConstants.loginCheck);
-      
-
+		Assert.assertTrue(hpage.isProductDisplayed(), AutomationConstants.loginCheck);
 	}
-
 }

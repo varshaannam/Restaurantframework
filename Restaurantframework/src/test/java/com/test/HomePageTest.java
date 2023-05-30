@@ -1,4 +1,5 @@
 package com.test;
+
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -11,15 +12,14 @@ import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.utilities.PropertyUtil;
 
-public class HomePageTest extends  AutomationBase {
+public class HomePageTest extends AutomationBase {
 	LoginPage lpage;
 	HomePage hpage;
 	Properties prop;
 	PropertyUtil propertyutil;
 
 	@Test(priority = 2, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
-
-	public void validateTheMenuItemsDisplayedOntheHomepage()  {
+	public void validateTheMenuItemsDisplayedOntheHomepage() {
 		propertyutil = new PropertyUtil();
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");

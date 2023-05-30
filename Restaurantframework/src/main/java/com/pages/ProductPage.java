@@ -72,7 +72,7 @@ public class ProductPage {
 	WebElement MNCstore_Quantity;
 	@FindBy(xpath = "(//input[@id='pricestr'])[1]")
 	WebElement MNCstore_price;
-	@FindBy(xpath = "(//button[text()='submit'])[2]")
+	@FindBy(xpath = "//body/div[@id='stock']/div[@id='stockModal']/div[1]/div[3]/button[2]")
 	public WebElement Storesubmit;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")
 	WebElement Productdelete_action;
@@ -102,6 +102,8 @@ public class ProductPage {
 
 	public void clickOnAddProduct() {
 		elementutil.clickOnElement(driver,addProduct);
+		waitutil.ElementTobeClickable(driver,addProduct,5);
+
 
 	}
 
@@ -245,14 +247,18 @@ public class ProductPage {
 
 	public void productsubmit() {
 		elementutil.clickOnElement(driver, productSubmit);
+		waitutil.ElementTobeClickable(driver,storeclose,15);
+		elementutil.clickOnElement(driver, storeclose);
 	}
 
-	public void storeclose() {
-		elementutil.clickOnElement(driver,storeclose);
-	}
+	public void productWithStoreSubmit() {
+		elementutil.clickOnElement(driver, productSubmit);
+
+			}
 
 	public String ProductSearch(String name) {
 		elementutil.enterValueToTheElement(driver, productSearch, name);
+		waitutil.ElementTobeClickable(driver,productSearch , 5);
 		return name;
 
 	}
@@ -293,6 +299,7 @@ public class ProductPage {
 
 	public void ClickStoresubmit() {
 		elementutil.clickOnElement(driver, Storesubmit);
+		waitutil.ElementTobeClickable(driver, Storesubmit, 15);
 	}
 
 	public void deleteActionOnProduct() {
@@ -307,7 +314,7 @@ public class ProductPage {
 
 	public void productViewAction() {
 		elementutil.clickOnElement(driver, Productview_action);
-		
+		waitutil.presenceOfElementLocated(driver, Productview_action, 15);
 
 	}
 

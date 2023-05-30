@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.utilities.WaitUtils;
 import com.utilities.WebElementUtils;
 import com.utilities.WebPageutils;
 
@@ -14,6 +16,8 @@ public class ExpensePage {
 	WebDriver driver;
 	WebElementUtils  elementutil = new WebElementUtils();
 	WebPageutils pageutil = new WebPageutils();
+	WaitUtils waitutil = new WaitUtils();
+
 	public ExpensePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -46,7 +50,6 @@ public class ExpensePage {
 	WebElement expenseCategory_searchresult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[5]")
 	WebElement expensestore_searchresult;
-
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")
 	WebElement expensedelete_action;
 	@FindBy(xpath = "//button[text()='Yes, delete it!']")
@@ -58,6 +61,7 @@ public class ExpensePage {
 
 		public void clickOnAddexpenseElement() {
 		elementutil.clickOnElement(driver, addexpense);
+		waitutil.presenceOfElementLocated(driver, addexpense, 5);
 	}
 
 	public boolean isAddcustomerElementDisplayed() {
@@ -94,6 +98,7 @@ public class ExpensePage {
 
 	public void submitofexpense() {
 		elementutil.clickOnElement(driver, expenseSubmit);
+		waitutil.ElementTobeClickable(driver,expenseSubmit , 5);
 	}
 
 	public void clickOnExpenseElement() {
@@ -102,6 +107,7 @@ public class ExpensePage {
 
 	public void clickOnAddExpenseElement() {
 		elementutil.clickOnElement(driver, addexpense);
+		waitutil.ElementTobeClickable(driver, addexpense,10);
 	}
 
 	public void enterDateofExpense(String name) {
@@ -130,6 +136,7 @@ public class ExpensePage {
 	}
 
 	public String enterSearchofexpenseElement(String name) {
+		elementutil.clearTheElement(driver, expense_search);
 		elementutil.enterValueToTheElement(driver, expense_search, name);
 		return name;
 

@@ -1,4 +1,5 @@
 package com.test;
+
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
@@ -18,7 +19,6 @@ import com.utilities.BrowserUtils;
 import com.utilities.ExcelUtil;
 import com.utilities.PropertyUtil;
 
-
 public class PeopleinCustomerPageTest extends AutomationBase {
 	WebDriver driver;
 	LoginPage lpage;
@@ -29,10 +29,8 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 	PropertyUtil propertyutil = new PropertyUtil();
 	BrowserUtils browser = new BrowserUtils();
 
-	
-
 	@Test(priority = 1, enabled = true)
-	public void validateElementsOncustomer()  {
+	public void validateElementsOncustomer() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		browser.launchtheURL(driver, prop.getProperty("url"));
@@ -53,7 +51,7 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 2, enabled = true)
-	public void validateAddcustomerFunctionality()  {
+	public void validateAddcustomerFunctionality() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		browser.launchtheURL(driver, prop.getProperty("url"));
@@ -69,7 +67,7 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 		cpage.enterPhonenumberOfCustomer(customernum);
 		String customermail = excelutil.readStringData("customer", 3, 2);
 		cpage.enterEmailOfcustomer(customermail);
-		String customerdiscount = excelutil.readStringData("customer",4, 2);
+		String customerdiscount = excelutil.readStringData("customer", 4, 2);
 		cpage.enterDiscountOfCustomer(customerdiscount);
 		cpage.submitofcustomer();
 		cpage.enterSearchofcustomerElement("customername");
@@ -113,7 +111,7 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 4, enabled = true)
-	public void validateEditCustomerFunctionality()  {
+	public void validateEditCustomerFunctionality() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		browser.launchtheURL(driver, prop.getProperty("url"));
@@ -121,7 +119,6 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		cpage = hpage.navigateToPeopleinCustomerPage();
 		excelutil = new ExcelUtil();
-
 		cpage.clickOnCustomersElement();
 		cpage.clickOnAddCustomerElement();
 		String customername3 = excelutil.readStringData("customer", 9, 2);
@@ -155,6 +152,3 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 	}
 
 }
-
-
-

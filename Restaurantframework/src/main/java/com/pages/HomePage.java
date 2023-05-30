@@ -1,16 +1,23 @@
 package com.pages;
 
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.utilities.WebElementUtils;
+import com.utilities.WaitUtils;
 
 public class HomePage {
 	WebDriver driver;
 	WebElementUtils elementutil = new WebElementUtils();
+	WaitUtils waitutil = new WaitUtils();
+
+	public HomePage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+
 	@FindBy(xpath = "//span[text()='POS']")
 	WebElement poslink;
 	@FindBy(xpath = "//span[text()='Product']")
@@ -34,10 +41,6 @@ public class HomePage {
 	@FindBy(xpath = "//i[@class='fa fa-sign-out fa-lg']")
 	WebElement logout;
 
-	public HomePage(WebDriver driver) {
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
-	}
 	/**
 	 * This method is to check whether elements are displayed
 	 * 
@@ -98,6 +101,11 @@ public class HomePage {
 		boolean flag = elementutil.isElementDisplayed(driver, logout);
 		return flag;
 	}
+
+	public void implementImplicitWait() {
+		waitutil.implicitwait(driver, 5);
+	}
+
 	/**
 	 * This methods are used to navigate to corresponding pages
 	 * 
@@ -159,24 +167,24 @@ public class HomePage {
 
 	}
 
-	public ProductPage navigateToproductPage()  {
+	public ProductPage navigateToproductPage() {
 		navigatedToProductMenu();
 		return new ProductPage(driver);
 
 	}
 
-	public StorePage navigateTostorePage()  {
+	public StorePage navigateTostorePage() {
 		navigatedToStoreMenu();
 		return new StorePage(driver);
 	}
 
-	public PeopleinWaiterPage navigateToPeopleinWaiterPage()  {
+	public PeopleinWaiterPage navigateToPeopleinWaiterPage() {
 		navigatedToPeopleMenu();
 		return new PeopleinWaiterPage(driver);
 
 	}
 
-	public PeopleinCustomerPage navigateToPeopleinCustomerPage()  {
+	public PeopleinCustomerPage navigateToPeopleinCustomerPage() {
 		navigatedToPeopleMenu();
 		return new PeopleinCustomerPage(driver);
 
@@ -187,7 +195,7 @@ public class HomePage {
 		return new PeopleinSupplierPage(driver);
 	}
 
-	public ExpensePage navigateToExpensePage()  {
+	public ExpensePage navigateToExpensePage() {
 		navigatedToPeopleMenu();
 		return new ExpensePage(driver);
 	}
@@ -197,7 +205,7 @@ public class HomePage {
 		return new LogoutPage(driver);
 	}
 
-	public SettingPage navigateToSettingPage()  {
+	public SettingPage navigateToSettingPage() {
 		navigatedToSettingMenu();
 		return new SettingPage(driver);
 	}

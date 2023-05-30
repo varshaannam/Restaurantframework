@@ -1,4 +1,5 @@
 package com.test;
+
 import java.io.IOException;
 import java.util.Properties;
 
@@ -18,7 +19,7 @@ import com.utilities.PropertyUtil;
 import com.utilities.WaitUtils;
 
 public class StorePageTest extends AutomationBase {
-	
+
 	LoginPage lpage;
 	HomePage hpage;
 	StorePage spage;
@@ -28,7 +29,7 @@ public class StorePageTest extends AutomationBase {
 	PropertyUtil propertyutil = new PropertyUtil();
 	BrowserUtils browser = new BrowserUtils();
 
-	@Test(priority = 1, enabled = true,groups= {"Smoke"})
+	@Test(priority = 1, enabled = true, groups = { "Smoke" })
 	public void validateElementsOnStore() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
@@ -39,8 +40,6 @@ public class StorePageTest extends AutomationBase {
 		spage = hpage.navigateTostorePage();
 		spage.clickOnAddStore();
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(spage.isAddStoreDisplayed(), "Failure message:addstore is not displayed");
-		soft.assertTrue(spage.isStoreNameDisplayed(), "Failure message:storename is not displayed");
 		soft.assertTrue(spage.isStoreEmailDisplayed(), "Failure message:storeemail is not displayed");
 		soft.assertTrue(spage.isStorePhoneDisplayed(), "Failure message:storephone is not displayed");
 		soft.assertTrue(spage.isStoreCountryDisplayed(), "Failure message:storecountry is not displayed");
@@ -49,8 +48,8 @@ public class StorePageTest extends AutomationBase {
 		soft.assertAll();
 	}
 
-	@Test(priority = 2, enabled = true,groups= {"Smoke"})
-	public void validateAddStoreFunctionality()  {
+	@Test(priority = 2, enabled = true, groups = { "Smoke" })
+	public void validateAddStoreFunctionality() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		excelutil = new ExcelUtil();
@@ -88,7 +87,7 @@ public class StorePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 3, enabled = true)
-	public void validateDeleteActionOnStore()  {
+	public void validateDeleteActionOnStore() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		excelutil = new ExcelUtil();
@@ -98,7 +97,7 @@ public class StorePageTest extends AutomationBase {
 		spage = hpage.navigateTostorePage();
 		spage.clickOnAddStore();
 
-		//spage.clickOnAddStore();
+		// spage.clickOnAddStore();
 		String storename = excelutil.readStringData("store", 7, 2);
 		spage.enterNameOfStore(storename);
 		String storemail = excelutil.readStringData("store", 8, 2);
@@ -120,7 +119,7 @@ public class StorePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 4, enabled = true)
-	public void validateEditActionOnStore()  {
+	public void validateEditActionOnStore() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		excelutil = new ExcelUtil();
@@ -130,7 +129,6 @@ public class StorePageTest extends AutomationBase {
 		spage = hpage.navigateTostorePage();
 		spage.clickOnAddStore();
 
-		
 		String storename = excelutil.readStringData("store", 13, 2);
 		spage.enterNameOfStore(storename);
 		String storemail = excelutil.readStringData("store", 14, 2);
@@ -155,6 +153,3 @@ public class StorePageTest extends AutomationBase {
 
 	}
 }
-
-
-

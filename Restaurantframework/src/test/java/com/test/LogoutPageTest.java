@@ -19,19 +19,15 @@ public class LogoutPageTest extends AutomationBase {
 		HomePage hpage;
 		LogoutPage opage;
 		Properties prop;
-		WaitUtils wait;
 		PropertyUtil propertyutil = new PropertyUtil();
 		BrowserUtils browser = new BrowserUtils();
 		@Test(priority = 1, enabled = true)
 		public void validateclickactionOnLogout() {
 			lpage = new LoginPage(driver);
-			wait = new WaitUtils();
 			prop = propertyutil.getProperty("config.properties");
 			browser.launchtheURL(driver, prop.getProperty("url"));
-			wait.implicitwait(driver, 30);
 			hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 			opage = hpage.navigateToLogoutPage();
-
 			opage.clickActionOnLogout();
 			Assert.assertTrue(lpage.isLoginDisplayed(), "Failure message:login is not displayed");
 		}

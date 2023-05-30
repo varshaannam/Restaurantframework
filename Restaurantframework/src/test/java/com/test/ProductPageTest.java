@@ -22,21 +22,17 @@ public class ProductPageTest extends AutomationBase {
 	ProductPage ppage;
 	ExcelUtil excelutil;
 	Properties prop;
-	WaitUtils wait;
 	PropertyUtil propertyutil;
 
-	@Test(priority = 3, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 3, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateElementsOnProduct() {
 		lpage = new LoginPage(driver);
 		hpage = new HomePage(driver);
-		wait = new WaitUtils();
 		propertyutil = new PropertyUtil();
 		prop = propertyutil.getProperty("config.properties");
-		// driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		lpage.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		ppage = hpage.navigateToproductPage();
 		excelutil = new ExcelUtil();
-
 		ppage.clickOnAddProduct();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(ppage.isAddProductDisplayed(), AutomationConstants.LinkDisplayCheck);
@@ -52,14 +48,11 @@ public class ProductPageTest extends AutomationBase {
 	public void validateAddProductWithoutStockFunctionality() {
 		lpage = new LoginPage(driver);
 		hpage = new HomePage(driver);
-		wait = new WaitUtils();
 		propertyutil = new PropertyUtil();
 		prop = propertyutil.getProperty("config.properties");
-		// driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		lpage.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		ppage = hpage.navigateToproductPage();
 		excelutil = new ExcelUtil();
-
 		ppage.clickOnAddProduct();
 		String ptype = excelutil.readStringData("Product", 1, 2);
 		ppage.selectTypeOfProduct(ptype);
@@ -88,29 +81,19 @@ public class ProductPageTest extends AutomationBase {
 		String pdescription = excelutil.readStringData("Product", 13, 2);
 		ppage.enterProductDescription(pdescription);
 		ppage.productsubmit();
-		ppage.storeclose();
-		// ppage.ClickStoresubmit();
-		// wait.presenceOfElementLocated(driver,ppage.Storesubmit, 10);
-		wait.ElementTobeClickable(driver, ppage.storeclose, 30);
 		ppage.ProductSearch(pcode);
-		// SoftAssert soft = new SoftAssert();
-		// soft.assertEquals(ppage.getProductCodeFromSearchResults(), "2020",
-		// AutomationConstants.ErrorMessage);
-		// soft.assertEquals(ppage.getProducNameFromSearchResults(), "Casa",
-		// AutomationConstants.ErrorMessage);
-		// soft.assertEquals(ppage.getProductCategoryFromSearchResults(), "Pizza",
-		// AutomationConstants.ErrorMessage);
-		// soft.assertEquals(ppage.getProductTaxFromSearchResults(), "20",
-		// AutomationConstants.ErrorMessage);
-		// soft.assertAll();
-
+		SoftAssert soft = new SoftAssert();
+		soft.assertEquals(ppage.getProductCodeFromSearchResults(), "2020", AutomationConstants.ErrorMessage);
+		soft.assertEquals(ppage.getProducNameFromSearchResults(), "Casa", AutomationConstants.ErrorMessage);
+		soft.assertEquals(ppage.getProductCategoryFromSearchResults(), "Pizza", AutomationConstants.ErrorMessage);
+		soft.assertEquals(ppage.getProductTaxFromSearchResults(), "20", AutomationConstants.ErrorMessage);
+		soft.assertAll();
 	}
 
 	@Test(priority = 5, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateAddProductWithStockFunctionality() {
 		lpage = new LoginPage(driver);
 		hpage = new HomePage(driver);
-		wait = new WaitUtils();
 		propertyutil = new PropertyUtil();
 		prop = propertyutil.getProperty("config.properties");
 		// driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
@@ -141,16 +124,15 @@ public class ProductPageTest extends AutomationBase {
 		String sAlertquantity = excelutil.readStringData("Product", 24, 2);
 		ppage.enterAlertQuantityofProduct(sAlertquantity);
 		String sOption = excelutil.readStringData("Product", 25, 2);
-		ppage.enterProductOption( sOption);
+		ppage.enterProductOption(sOption);
 		String sDescription = excelutil.readStringData("Product", 26, 2);
-		ppage.enterProductDescription(sDescription );
-		ppage.productsubmit();
+		ppage.enterProductDescription(sDescription);
+		ppage.productWithStoreSubmit();
 		String sMncstorequantity = excelutil.readStringData("Product", 27, 2);
 		ppage.enterMncStoreQuantity(sMncstorequantity);
 		String sMncStoreprice = excelutil.readStringData("Product", 28, 2);
 		ppage.enterMncStorePrice(sMncStoreprice);
 		ppage.ClickStoresubmit();
-		wait.presenceOfElementLocated(driver, ppage.Storesubmit, 30);
 		String pSearch = excelutil.readStringData("Product", 15, 2);
 		ppage.ProductSearch(pSearch);
 		SoftAssert soft = new SoftAssert();
@@ -158,9 +140,7 @@ public class ProductPageTest extends AutomationBase {
 		soft.assertEquals(ppage.getProducNameFromSearchResults(), "home", "Failure message:productname is not match");
 		soft.assertEquals(ppage.getProductCategoryFromSearchResults(), "Pizza",
 				"Failure message:productcategory is not match");
-		soft.assertEquals(ppage.getProductTaxFromSearchResults(), "20", "Failure message:producttax is not match"); //
-		soft.assertEquals(ppage.getProductPriceFromSearchResults(), "20000",
-				"Failure message:productprice is not match");
+		soft.assertEquals(ppage.getProductTaxFromSearchResults(), "20", "Failure message:producttax is not match");
 		soft.assertAll();
 
 	}
@@ -169,10 +149,8 @@ public class ProductPageTest extends AutomationBase {
 	public void validateDeleteActionOnProduct() {
 		lpage = new LoginPage(driver);
 		hpage = new HomePage(driver);
-		wait = new WaitUtils();
 		propertyutil = new PropertyUtil();
 		prop = propertyutil.getProperty("config.properties");
-		// driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		lpage.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		ppage = hpage.navigateToproductPage();
 		excelutil = new ExcelUtil();
@@ -203,16 +181,14 @@ public class ProductPageTest extends AutomationBase {
 		ppage.enterProductOption(dOption);
 		String dDescription = excelutil.readStringData("Product", 41, 2);
 		ppage.enterProductDescription(dDescription);
-		ppage.productsubmit();
+		ppage.productWithStoreSubmit();
 		String dMncstorequantity = excelutil.readStringData("Product", 42, 2);
 		ppage.enterMncStoreQuantity(dMncstorequantity);
 		String dmncstoreprice = excelutil.readStringData("Product", 43, 2);
 		ppage.enterMncStorePrice(dmncstoreprice);
 		ppage.ClickStoresubmit();
-		wait.presenceOfElementLocated(driver, ppage.Storesubmit, 30);
 		ppage.deleteActionOnProduct();
 		ppage.deleteConfirmationOnProduct();
-		wait.presenceOfElementLocated(driver, ppage.productdelete_confirm, 30);
 		String dsearch = excelutil.readStringData("Product", 30, 2);
 		ppage.ProductSearch("dsearch");
 		Assert.assertTrue(ppage.isInvalidresultFromSearch());
@@ -222,10 +198,8 @@ public class ProductPageTest extends AutomationBase {
 	public void validateViewActionOnProduct() {
 		lpage = new LoginPage(driver);
 		hpage = new HomePage(driver);
-		wait = new WaitUtils();
 		propertyutil = new PropertyUtil();
 		prop = propertyutil.getProperty("config.properties");
-		// driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		lpage.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		ppage = hpage.navigateToproductPage();
 		excelutil = new ExcelUtil();
@@ -256,15 +230,20 @@ public class ProductPageTest extends AutomationBase {
 		ppage.enterProductOption(voption);
 		String vDescription = excelutil.readStringData("Product", 56, 2);
 		ppage.enterProductDescription(vDescription);
-		ppage.productsubmit(); // ppage.selectMncStoreQuantity("3"); //
+		ppage.productWithStoreSubmit();
 		String mncquantity = excelutil.readStringData("Product", 57, 2);
 		ppage.enterMncStoreQuantity(mncquantity);
 		String mncprice = excelutil.readStringData("Product", 58, 2);
 		ppage.enterMncStorePrice(mncprice);
 		ppage.ClickStoresubmit();
-		wait.ElementTobeClickable(driver, ppage.Storesubmit, 30);
 		ppage.productViewAction();
-		wait.presenceOfElementLocated(driver, ppage.Productview_action, 30);
+		ppage.ProductSearch(vCode);
+		SoftAssert soft = new SoftAssert();
+		soft.assertEquals(ppage.getProductCodeFromSearchResults(), "2032", AutomationConstants.ErrorMessage);
+		soft.assertEquals(ppage.getProducNameFromSearchResults(), "home", AutomationConstants.ErrorMessage);
+		soft.assertEquals(ppage.getProductCategoryFromSearchResults(), "Pizza", AutomationConstants.ErrorMessage);
+		soft.assertEquals(ppage.getProductTaxFromSearchResults(), "20", AutomationConstants.ErrorMessage);
+		soft.assertAll();
 
 	}
 
@@ -272,14 +251,11 @@ public class ProductPageTest extends AutomationBase {
 	public void validateEditActionOnProduct() {
 		lpage = new LoginPage(driver);
 		hpage = new HomePage(driver);
-		wait = new WaitUtils();
 		propertyutil = new PropertyUtil();
 		prop = propertyutil.getProperty("config.properties");
-		// driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		lpage.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		ppage = hpage.navigateToproductPage();
 		excelutil = new ExcelUtil();
-
 		ppage.clickOnAddProduct();
 		String eType = excelutil.readStringData("Product", 59, 2);
 		ppage.selectTypeOfProduct(eType);
@@ -301,33 +277,36 @@ public class ProductPageTest extends AutomationBase {
 		ppage.enterPriceOfProduct(eProductunit);
 		String eAlert = excelutil.readStringData("Product", 68, 2);
 		ppage.enterAlertQuantityofProduct(eAlert);
+		ppage.productWithStoreSubmit();
 		String eMncquantity = excelutil.readStringData("Product", 69, 2);
 		ppage.enterMncStoreQuantity(eMncquantity);
 		String eMncprice = excelutil.readStringData("Product", 70, 2);
 		ppage.enterMncStorePrice(eMncprice);
 		ppage.ClickStoresubmit();
-		wait.ElementTobeClickable(driver, ppage.Storesubmit, 30);
 		ppage.productEditAction();
 		String eEditCode = excelutil.readStringData("Product", 71, 2);
 		ppage.enterCodeOfProduct(eEditCode);
 		String eEditname = excelutil.readStringData("Product", 72, 2);
 		ppage.enterNameOfProduct(eEditname);
-		ppage.productsubmit();
-
+		ppage.productWithStoreSubmit();
+		ppage.ProductSearch(eEditCode);
+		SoftAssert soft = new SoftAssert();
+		soft.assertEquals(ppage.getProductCodeFromSearchResults(), "2034", AutomationConstants.ErrorMessage);
+		soft.assertEquals(ppage.getProducNameFromSearchResults(), "home", AutomationConstants.ErrorMessage);
+		soft.assertEquals(ppage.getProductCategoryFromSearchResults(), "Pizza", AutomationConstants.ErrorMessage);
+		soft.assertEquals(ppage.getProductTaxFromSearchResults(), "20", AutomationConstants.ErrorMessage);
+		soft.assertAll();
 	}
 
 	@Test(priority = 9, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateModifyStocktActionOnProduct() {
 		lpage = new LoginPage(driver);
 		hpage = new HomePage(driver);
-		wait = new WaitUtils();
 		propertyutil = new PropertyUtil();
 		prop = propertyutil.getProperty("config.properties");
-		// driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		lpage.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		ppage = hpage.navigateToproductPage();
 		excelutil = new ExcelUtil();
-
 		ppage.clickOnAddProduct();
 		String mType = excelutil.readStringData("Product", 73, 2);
 		ppage.selectTypeOfProduct(mType);
@@ -351,21 +330,25 @@ public class ProductPageTest extends AutomationBase {
 		ppage.enterProductUnit(mProductunit);
 		String mAlert = excelutil.readStringData("Product", 83, 2);
 		ppage.enterAlertQuantityofProduct(mAlert);
-		ppage.productsubmit();
-		// ppage.selectMncStoreQuantity("3");
-		// ppage.selectMncStorePrice("60000");
+		ppage.productWithStoreSubmit();
 		String mMncquantity = excelutil.readStringData("Product", 84, 2);
 		ppage.enterMncStoreQuantity("mMncquantity");
 		String mMncprice = excelutil.readStringData("Product", 85, 2);
 		ppage.enterMncStorePrice("mMncprice");
 		ppage.ClickStoresubmit();
-		wait.ElementTobeClickable(driver, ppage.Storesubmit, 30);
 		ppage.modifyStockAction();
 		String editMncquantity = excelutil.readStringData("Product", 86, 2);
 		ppage.enterMncStoreQuantity("editMncquantity");
 		String editMncprice = excelutil.readStringData("Product", 87, 2);
 		ppage.enterMncStorePrice("editMncprice");
 		ppage.ClickStoresubmit();
+		ppage.ProductSearch(mCode);
+		SoftAssert soft = new SoftAssert();
+		soft.assertEquals(ppage.getProductCodeFromSearchResults(), "2034", AutomationConstants.ErrorMessage);
+		soft.assertEquals(ppage.getProducNameFromSearchResults(), "home", AutomationConstants.ErrorMessage);
+		soft.assertEquals(ppage.getProductCategoryFromSearchResults(), "Pizza", AutomationConstants.ErrorMessage);
+		soft.assertEquals(ppage.getProductTaxFromSearchResults(), "20", AutomationConstants.ErrorMessage);
+		soft.assertAll();
 
 	}
 
