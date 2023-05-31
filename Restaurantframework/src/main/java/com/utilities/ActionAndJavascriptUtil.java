@@ -7,7 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 
 
 public class ActionAndJavascriptUtil {
-	WebDriver driver;
+	//WebDriver driver;
 	Actions action;
 	JavascriptExecutor js;
 	/**perform click action on the webelement

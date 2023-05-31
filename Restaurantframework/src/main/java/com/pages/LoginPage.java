@@ -17,11 +17,11 @@ public class LoginPage {
 	}
 
 	@FindBy(xpath = "//input[@name='username']")
-	WebElement username;
+	private WebElement username;
 	@FindBy(xpath = "//input[@name='password']")
-	WebElement password;
+	private WebElement password;
 	@FindBy(xpath = "//input[@name='submit']")
-	WebElement login;
+	private WebElement login;
 
 	public void enterValuetoUsername(String name) {
 		elementutil.enterValueToTheElement(driver, username, name);
