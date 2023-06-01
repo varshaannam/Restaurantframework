@@ -8,12 +8,15 @@ import org.openqa.selenium.support.PageFactory;
 import com.utilities.WaitUtils;
 import com.utilities.WebElementUtils;
 import com.utilities.WebPageutils;
+import com.utilities.BrowserUtils;
+
 
 public class ProductPage {
 	WebDriver driver;
 	WebElementUtils elementutil = new WebElementUtils();
 	WebPageutils pageutil = new WebPageutils();
 	WaitUtils waitutil = new WaitUtils();
+	BrowserUtils browserutil = new BrowserUtils();
 	public ProductPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -86,6 +89,9 @@ public class ProductPage {
 	private WebElement modifyStock_action;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	private WebElement invalidsearchresult;
+	@FindBy(xpath ="(//button[text()='Close'])[5]")
+	private WebElement Productclose_action;
+
 	public void implementImplicitWait() {
 		waitutil.implicitwait(driver, 5);
 	}
@@ -101,48 +107,56 @@ public class ProductPage {
 	}
 
 	public void clickOnAddProduct() {
-		elementutil.clickOnElement(driver,addProduct);
 		waitutil.ElementTobeClickable(driver,addProduct,5);
+		elementutil.clickOnElement(driver,addProduct);
 
 
 	}
 
 	public boolean isProductTypeDisplayed() {
+		waitutil.ElementTobeClickable(driver,producttype ,20);
 		boolean flag = elementutil.isElementDisplayed(driver, producttype);
 		return flag;
 	}
 
 	public boolean isProductCodeDisplayed() {
+		waitutil.ElementTobeClickable(driver,productcode ,20);
 		boolean flag = elementutil.isElementDisplayed(driver, productcode);
 		return flag;
 	}
 
 	public boolean isProductnameDisplayed() {
+		waitutil.ElementTobeClickable(driver, productname,20);
 		boolean flag = elementutil.isElementDisplayed(driver, productname);
 		return flag;
 	}
 
 	public boolean isProductcategoryDisplayed() {
+		waitutil.ElementTobeClickable(driver, productcategory,20);
 		boolean flag = elementutil.isElementDisplayed(driver, productcategory);
 		return flag;
 	}
 
 	public boolean isProductsupplierDisplayed() {
+		waitutil.ElementTobeClickable(driver,productsupplier ,20);
 		boolean flag = elementutil.isElementDisplayed(driver, productsupplier);
 		return flag;
 	}
 
 	public boolean isProductpurchasepricerDisplayed() {
+		waitutil.ElementTobeClickable(driver, productpurchaseprice,20);
 		boolean flag = elementutil.isElementDisplayed(driver, productpurchaseprice);
 		return flag;
 	}
 
 	public boolean isProducttaxDisplayed() {
+		waitutil.ElementTobeClickable(driver,producttax ,20);
 		boolean flag = elementutil.isElementDisplayed(driver, producttax);
 		return flag;
 	}
 
 	public boolean isProducttaxMethodDisplayed() {
+		waitutil.ElementTobeClickable(driver,producttaxMethod ,20);
 		boolean flag = elementutil.isElementDisplayed(driver, producttaxMethod);
 		return flag;
 	}
@@ -187,53 +201,67 @@ public class ProductPage {
 		return flag;
 	}
 
-	public void selectTypeOfProduct(String name) {
-		pageutil.elementSelectByValue(driver, producttype, name);
+	public void selectTypeOfProduct(int value) {
+		elementutil.clearTheElement(driver, producttype);
+		pageutil.elementSelectByIndex(driver,producttype,value);
 	}
 
 	public void enterCodeOfProduct(String name) {
+		elementutil.clearTheElement(driver, productcode);
 		elementutil.enterValueToTheElement(driver, productcode, name);
 	}
 
 	public void enterNameOfProduct(String name) {
+		elementutil.clearTheElement(driver,productname );
 		elementutil.enterValueToTheElement(driver, productname, name);
 	}
 
-	public void selectCategoryOfProduct(String name) {
-		pageutil.elementSelectByValue(driver, productcategory, name);
+	public void selectCategoryOfProduct(int value) {
+		pageutil.elementSelectByIndex(driver,productcategory ,value);
+
 
 	}
 
-	public void selectSupplierOfProduct(String name) {
-		pageutil.elementSelectByValue(driver, productsupplier, name);
+	public void selectSupplierOfProduct(int value) {
+		elementutil.clearTheElement(driver,productsupplier );
+		pageutil.elementSelectByIndex(driver, productsupplier, value);
+
 
 	}
 
 	public void enterPurchasePriceOfProduct(String name) {
+		elementutil.clearTheElement(driver,productpurchaseprice );
 		elementutil.enterValueToTheElement(driver, productpurchaseprice, name);
 	}
 
 	public void enterTaxOfProduct(String name) {
+		elementutil.clearTheElement(driver,producttax );
 		elementutil.enterValueToTheElement(driver, producttax, name);
 	}
 
-	public void selectTaxMethod(String name) {
-		pageutil.elementSelectByValue(driver, producttaxMethod, name);
+	public void selectTaxMethod(int value) {
+		elementutil.clearTheElement(driver,producttaxMethod );
+		pageutil.elementSelectByIndex(driver, producttaxMethod, value);
+
 	}
 
 	public void enterPriceOfProduct(String name) {
+		elementutil.clearTheElement(driver, productprice);
 		elementutil.enterValueToTheElement(driver, productprice, name);
 	}
 
 	public void enterProductUnit(String name) {
+		elementutil.clearTheElement(driver, productunit);
 		elementutil.enterValueToTheElement(driver, productunit, name);
 	}
 
 	public void enterAlertQuantityofProduct(String name) {
+		elementutil.clearTheElement(driver,productAlertquantity );
 		elementutil.enterValueToTheElement(driver, productAlertquantity, name);
 	}
 
 	public void enterProductOption(String name) {
+		elementutil.clearTheElement(driver, productOptions);
 		elementutil.enterValueToTheElement(driver, productOptions, name);
 	}
 
@@ -242,7 +270,8 @@ public class ProductPage {
 	}
 
 	public void enterProductDescription(String name) {
-		elementutil.enterValueToTheElement(driver, productimageinput, name);
+		elementutil.clearTheElement(driver, productDescription);
+		elementutil.enterValueToTheElement(driver, productDescription, name);
 	}
 
 	public void productsubmit() {
@@ -257,8 +286,9 @@ public class ProductPage {
 			}
 
 	public String ProductSearch(String name) {
-		elementutil.enterValueToTheElement(driver, productSearch, name);
+		elementutil.clearTheElement(driver,productSearch );
 		waitutil.ElementTobeClickable(driver,productSearch , 5);
+		elementutil.enterValueToTheElement(driver, productSearch, name);
 		return name;
 
 	}
@@ -313,17 +343,20 @@ public class ProductPage {
 	}
 
 	public void productViewAction() {
+		elementutil.clearTheElement(driver,Productview_action );
+		waitutil.ElementTobeClickable(driver, Productview_action, 20);
 		elementutil.clickOnElement(driver, Productview_action);
-		waitutil.presenceOfElementLocated(driver, Productview_action, 15);
 
 	}
 
 	public void modifyStockAction() {
+		elementutil.clearTheElement(driver,modifyStock_action );
 		elementutil.clickOnElement(driver, modifyStock_action);
 
 	}
 
 	public void productEditAction() {
+		elementutil.clearTheElement(driver, Productedit_action);
 		elementutil.clickOnElement(driver, Productedit_action);
 
 	}
@@ -332,6 +365,14 @@ public class ProductPage {
 		boolean flag = elementutil.isElementDisplayed(driver, invalidsearchresult);
 		return flag;
 	}
+	public void closeTheWindow() {
+		browserutil.quitWindow(driver);
+	}
+	public void productviewclose() {
+		waitutil.ElementTobeClickable(driver, Productclose_action, 15);
+		elementutil.clickOnElement(driver, Productclose_action);
+	
 
-}
+
+	}}
 

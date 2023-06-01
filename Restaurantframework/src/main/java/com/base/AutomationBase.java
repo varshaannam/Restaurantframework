@@ -65,7 +65,6 @@ public class AutomationBase {
 	}
 
 	private void launchEdgeBrowser() {
-
 		driver = new EdgeDriver();
 		browser.maximizeWindow(driver);
 	}

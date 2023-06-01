@@ -5,10 +5,12 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.base.AutomationBase;
+import com.constants.AutomationConstants;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.PeopleinWaiterPage;
@@ -27,7 +29,7 @@ public class PeopleinWaiterPageTest extends AutomationBase {
 	PropertyUtil propertyutil = new PropertyUtil();
 	BrowserUtils browser = new BrowserUtils();
 
-	@Test(priority = 1, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 25, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateElementsOnwaiter() {
 		lpage = new LoginPage(driver);
 		supplier = new DataSupplier();
@@ -39,15 +41,15 @@ public class PeopleinWaiterPageTest extends AutomationBase {
 		epage.clickOnWaitersElement();
 		epage.clickOnAddwaitElement();
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(epage.isAddwaiterElementDisplayed(), "Failure message:addwaiter is not displayed");
-		soft.assertTrue(epage.isNameOfWaiterDisplayed(), "Failure message:nameofwaiter is not displayed");
-		soft.assertTrue(epage.isPhonenumberOfWaiterDisplayed(), "Failure message:phonenumber is not displayed");
-		soft.assertTrue(epage.isEmailOfWaiterDisplayed(), "Failure message:email is not displayed");
-		soft.assertTrue(epage.isStoreOfWaiterDisplayed(), "Failure message:storeofwaiter is not displayed");
+		soft.assertTrue(epage.isAddwaiterElementDisplayed(), AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(epage.isNameOfWaiterDisplayed(), AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(epage.isPhonenumberOfWaiterDisplayed(), AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(epage.isEmailOfWaiterDisplayed(), AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(epage.isStoreOfWaiterDisplayed(), AutomationConstants.LinkDisplayCheck);
 		soft.assertAll();
 	}
 
-	@Test(priority = 2, enabled = true, dataProvider = "dataProvider", dataProviderClass = DataSupplier.class)
+	@Test(priority = 26, enabled = true, dataProvider = "dataProvider", dataProviderClass = DataSupplier.class)
 	public void validateAddwaiterFunctionality(String name, String phonenum, String mail, String discount) {
 		lpage = new LoginPage(driver);
 		supplier = new DataSupplier();
@@ -65,16 +67,14 @@ public class PeopleinWaiterPageTest extends AutomationBase {
 		epage.submitofWaiter();
 		epage.enterSearchofWaiterElement("name");
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(epage.getwaiternameFromSearchResults(), "john", "Failure message:waitername is not match");
-		soft.assertEquals(epage.getwaiteremaileFromSearchResults(), "azxvb@gmail.com",
-				"Failure message:waiteremail is not match");
-		soft.assertEquals(epage.getwaiterphonenumberFromSearchResults(), "19056788",
-				"Failure message:waiterphoneis not match");
+		soft.assertEquals(epage.getwaiternameFromSearchResults(), "john", AutomationConstants.ErrorMessage);
+		soft.assertEquals(epage.getwaiteremaileFromSearchResults(), "azxvb@gmail.com",AutomationConstants.ErrorMessage);
+		soft.assertEquals(epage.getwaiterphonenumberFromSearchResults(), "19056788", AutomationConstants.ErrorMessage);
 		soft.assertAll();
 
 	}
 
-	@Test(priority = 3, enabled = false, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority =27, enabled = false, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validatedeletewaiterFunctionality() {
 		lpage = new LoginPage(driver);
 		supplier = new DataSupplier();
@@ -101,7 +101,7 @@ public class PeopleinWaiterPageTest extends AutomationBase {
 		Assert.assertTrue(epage.isInvalidresultFromSearch());
 	}
 
-	@Test(priority = 4, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority = 28, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateEditwaiterFunctionality() {
 		lpage = new LoginPage(driver);
 		supplier = new DataSupplier();
@@ -133,11 +133,16 @@ public class PeopleinWaiterPageTest extends AutomationBase {
 		epage.submitofWaiter();
 		epage.enterSearchofWaiterElement("eric");
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(epage.getwaiternameFromSearchResults(), "eric", "Failure message:waitername is not match");
-		soft.assertEquals(epage.getwaiteremaileFromSearchResults(), "azxvb@gmail.com","Failure message:waiteremail is not match");
-		soft.assertEquals(epage.getwaiterphonenumberFromSearchResults(), "1000000","Failure message:waiterphoneis not match");
+		soft.assertEquals(epage.getwaiternameFromSearchResults(), "eric", AutomationConstants.ErrorMessage);
+		soft.assertEquals(epage.getwaiteremaileFromSearchResults(), "azxvb@gmail.com", AutomationConstants.ErrorMessage);
+		soft.assertEquals(epage.getwaiterphonenumberFromSearchResults(), "1000000", AutomationConstants.ErrorMessage);
 		soft.assertAll();
 
 	}
+	@AfterMethod
+	public void postRun() {
+		epage.closeTheWindow();
+	}
+
 
 }

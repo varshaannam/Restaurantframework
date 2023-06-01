@@ -12,7 +12,9 @@ import com.utilities.WebElementUtils;
 public class SettingPage {
 	WebDriver driver;
 	WebElementUtils elementutil = new WebElementUtils();
+	BrowserUtils browserutil = new BrowserUtils();
 	BrowserUtils util = new BrowserUtils();
+
 	public SettingPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -29,7 +31,7 @@ public class SettingPage {
 	@FindBy(xpath = "(//button[text()='Submit'])[1]")
 	WebElement setsubmit;
 
-		public boolean isCompanynameDisplayed() {
+	public boolean isCompanynameDisplayed() {
 		boolean flag = elementutil.isElementDisplayed(driver, companyname);
 		return flag;
 	}
@@ -65,13 +67,13 @@ public class SettingPage {
 	}
 
 	public void enterCurrencycodeOfCompany(String name) {
-		elementutil.clearTheElement(driver,currencycode );
+		elementutil.clearTheElement(driver, currencycode);
 		elementutil.enterValueToTheElement(driver, currencycode, name);
 
 	}
 
 	public void enterDefaultdiscountOfCompany(String name) {
-		elementutil.clearTheElement(driver,defaultdiscount );
+		elementutil.clearTheElement(driver, defaultdiscount);
 		elementutil.enterValueToTheElement(driver, defaultdiscount, name);
 
 	}
@@ -80,21 +82,14 @@ public class SettingPage {
 		elementutil.clickOnElement(driver, setsubmit);
 	}
 
-	/*public void clearActionOnCompanyname() {
-		elementutil.clearTheElement(driver, companyname);
-		;
-
-	}
-
-	public void clearActionOnphonenumber() {
-		elementutil.clearTheElement(driver, companyphone);
-		;
-
-	}*/
-
+	
 	public void refreshActionOnSetting() {
 		util.navigateRefreshPage(driver);
 
+	}
+
+	public void closeTheWindow() {
+		browserutil.quitWindow(driver);
 	}
 
 }

@@ -5,10 +5,12 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.base.AutomationBase;
+import com.constants.AutomationConstants;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.PeopleinSupplierPage;
@@ -26,27 +28,26 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 	PropertyUtil propertyutil = new PropertyUtil();
 	BrowserUtils browser = new BrowserUtils();
 
-	@Test(priority = 1, enabled = true)
+	@Test(priority = 21, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateElementsOnSupplier() {
 		lpage = new LoginPage(driver);
 		excelutil = new ExcelUtil();
 		prop = propertyutil.getProperty("config.properties");
 		browser.launchtheURL(driver, prop.getProperty("url"));
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		spage = hpage.navigateToPeopleinSupplierrPage();
 		spage.clickOnSupplierElement();
 		spage.clickOnAddSupplierElement();
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(spage.isAddSupplierElementDisplayed(), "Failure message:addsupplier is not displayed");
-		soft.assertTrue(spage.isNameOfsupplierDisplayed(), "Failure message:nameofCustomer is not displayed");
-		soft.assertTrue(spage.isPhonenumberOfSupplierDisplayed(), "Failure message:phonenumber is not displayed");
-		soft.assertTrue(spage.isEmailOfSupplierDisplayed(), "Failure message:email is not displayed");
+		soft.assertTrue(spage.isAddSupplierElementDisplayed(), AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(spage.isNameOfsupplierDisplayed(), AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(spage.isPhonenumberOfSupplierDisplayed(), AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(spage.isEmailOfSupplierDisplayed(), AutomationConstants.LinkDisplayCheck);
 		soft.assertAll();
 
 	}
 
-	@Test(priority = 2, enabled = true)
+	@Test(priority = 22, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateAddsupplierFunctionality() {
 		spage.clickOnSupplierElement();
 		spage.clickOnAddSupplierElement();
@@ -59,17 +60,14 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 		spage.submitofsupplier();
 		spage.enterSearchofsupplierElement("suppliername");
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(spage.getSuppliernameFromSearchResults(), "godwin",
-				"Failure message:customername is not match");
-		soft.assertEquals(spage.getsupplierphonenumberFromSearchResults(), "965734123",
-				"Failure message:customeremail is not match");
-		soft.assertEquals(spage.getsupplieremaileFromSearchResults(), "appu@gmail.com",
-				"Failure message:customerphone is not match");
+		soft.assertEquals(spage.getSuppliernameFromSearchResults(), "godwin", AutomationConstants.ErrorMessage);
+		soft.assertEquals(spage.getsupplierphonenumberFromSearchResults(), "965734123",AutomationConstants.ErrorMessage);
+		soft.assertEquals(spage.getsupplieremaileFromSearchResults(), "appu@gmail.com", AutomationConstants.ErrorMessage);
 		soft.assertAll();
 
 	}
 
-	@Test(priority = 3, enabled = true)
+	@Test(priority = 23, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validatedeletsupplierFunctionality() {
 		spage.clickOnSupplierElement();
 		spage.clickOnAddSupplierElement();
@@ -86,7 +84,7 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 		Assert.assertTrue(spage.isInvalidresultFromSearch());
 	}
 
-	@Test(priority = 4, enabled = true)
+	@Test(priority =24, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateEditSupplierFunctionality() {
 		spage.clickOnSupplierElement();
 		spage.clickOnAddSupplierElement();
@@ -105,13 +103,14 @@ public class PeopleinSupplierPageTest extends AutomationBase {
 		spage.submitofsupplier();
 		spage.enterSearchofsupplierElement("suppliername4");
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(spage.getSuppliernameFromSearchResults(), "kuku",
-				"Failure message:suppliername is not match");
-		soft.assertEquals(spage.getsupplierphonenumberFromSearchResults(), "9090909090",
-				"Failure message:supplieremail is not match");
-		soft.assertEquals(spage.getsupplieremaileFromSearchResults(), "brijitha@gmail.com",
-				"Failure message:supplierphone is not match");
+		soft.assertEquals(spage.getSuppliernameFromSearchResults(), "kuku", AutomationConstants.ErrorMessage);
+		soft.assertEquals(spage.getsupplierphonenumberFromSearchResults(), "9090909090", AutomationConstants.ErrorMessage);
+		soft.assertEquals(spage.getsupplieremaileFromSearchResults(), "brijitha@gmail.com",AutomationConstants.ErrorMessage);
 		soft.assertAll();
+	}
+	@AfterMethod
+	public void postRun() {
+		spage.closeTheWindow();
 	}
 
 }

@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.base.AutomationBase;
+import com.constants.AutomationConstants;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.LogoutPage;
@@ -21,7 +22,7 @@ public class LogoutPageTest extends AutomationBase {
 		Properties prop;
 		PropertyUtil propertyutil = new PropertyUtil();
 		BrowserUtils browser = new BrowserUtils();
-		@Test(priority = 1, enabled = true)
+		@Test(priority = 31, enabled = true)
 		public void validateclickactionOnLogout() {
 			lpage = new LoginPage(driver);
 			prop = propertyutil.getProperty("config.properties");
@@ -29,7 +30,7 @@ public class LogoutPageTest extends AutomationBase {
 			hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 			opage = hpage.navigateToLogoutPage();
 			opage.clickActionOnLogout();
-			Assert.assertTrue(lpage.isLoginDisplayed(), "Failure message:login is not displayed");
+			Assert.assertTrue(lpage.isLoginDisplayed(),AutomationConstants.LinkDisplayCheck);
 		}
 
 	}

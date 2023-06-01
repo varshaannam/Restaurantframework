@@ -5,15 +5,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.utilities.BrowserUtils;
 import com.utilities.WebElementUtils;
 import com.utilities.WebPageutils;
 
 public class PeopleinSupplierPage {
 
 	WebDriver driver;
-
 	WebElementUtils elementutil = new WebElementUtils();
 	WebPageutils pageutil = new WebPageutils();
+	BrowserUtils browserutil = new BrowserUtils();
 	@FindBy(xpath = "//span[text()='People']")
 	WebElement peoplelink;
 	@FindBy(xpath = "//span[text()='Suppliers']")
@@ -139,8 +140,11 @@ public class PeopleinSupplierPage {
 
 	public void clearActionOnSuppliername() {
 		elementutil.clearTheElement(driver, supplier_name);
-		;
 
+	}
+
+	public void closeTheWindow() {
+		browserutil.quitWindow(driver);
 	}
 
 }

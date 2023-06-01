@@ -3,10 +3,13 @@ package com.test;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.base.AutomationBase;
+import com.constants.AutomationConstants;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.SettingPage;
@@ -24,7 +27,7 @@ public class SettingPageTest extends AutomationBase {
 	BrowserUtils browser = new BrowserUtils();
 	GenericUtils genericutil = new GenericUtils();
 
-	@Test(priority = 1, enabled = true)
+	@Test(priority = 29, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateElementsOnSetting() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
@@ -32,14 +35,14 @@ public class SettingPageTest extends AutomationBase {
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		setpage = hpage.navigateToSettingPage();
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(setpage.isCompanynameDisplayed(), "Failure message:companyname is not displayed");
-		soft.assertTrue(setpage.iscompanyphoneDisplayed(), "Failure message:companyphone is not displayed");
-		soft.assertTrue(setpage.iscurrencycodeeDisplayed(), "Failure message:currencycode is not displayed");
-		soft.assertTrue(setpage.isdefaultdiscountDisplayed(), "Failure message:defaultdiscount is not displayed");
+		soft.assertTrue(setpage.isCompanynameDisplayed(),AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(setpage.iscompanyphoneDisplayed(),AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(setpage.iscurrencycodeeDisplayed(),AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(setpage.isdefaultdiscountDisplayed(),AutomationConstants.LinkDisplayCheck);
 		soft.assertAll();
 	}
 
-	@Test(priority = 2, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
+	@Test(priority =30 , enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateUpdateSettingsInSettingsPage_ByEnteringValuesInTheFieldsProvided() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
@@ -55,6 +58,12 @@ public class SettingPageTest extends AutomationBase {
 		String defaultdiscount = genericutil.generateNumericData(2);
 		setpage.enterDefaultdiscountOfCompany(defaultdiscount);
 		setpage.clickOnsetsubmit();
-	}
+		Assert.assertNotNull(companyname);
+		Assert.assertNotNull(phonenumber);
 
+	}
+	@AfterMethod
+	public void postRun() {
+		setpage.closeTheWindow();
+	}
 }

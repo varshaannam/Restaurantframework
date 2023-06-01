@@ -9,16 +9,16 @@
 		<parameter name="browserName" value="Chrome"></parameter>
 
 		<classes>
-			<!--<class name="com.test.PeopleinCustomerPageTest" />-->
-			<!--<class name="com.test.SettingPageTest" />-->
-			<!--<class name="com.test.StorePageTest" />-->
-			<!--<class name="com.test.ProductPageTest" />-->
-			<!--<class name="com.test.PeopleinSupplierPageTest" />-->
-			<!--<class name="com.test.PeopleinWaiterPageTest" />-->
-			<class name="com.test.LoginPageTest"/>
-			<!--<class name="com.test.ExpensePageTest" />-->
-			<!--<class name="com.test.LogoutPageTest" />-->
-			<!--<class name="com.test.HomePageTest" />-->
+			<!--<class name="com.test.PeopleinCustomerPageTest" /> -->
+			<!--<class name="com.test.SettingPageTest" /> -->
+			<!--<class name="com.test.StorePageTest" /> -->
+			<class name="com.test.ProductPageTest" />
+			<!--<class name="com.test.PeopleinSupplierPageTest" /> -->
+			<!--<class name="com.test.PeopleinWaiterPageTest" /> -->
+			<!--<class name="com.test.LoginPageTest"/> -->
+			<!--<class name="com.test.ExpensePageTest" /> -->
+			<!--<class name="com.test.LogoutPageTest" /> -->
+			<!--<class name="com.test.HomePageTest" /> -->
 		</classes>
 	</test> <!--
 	Test -->

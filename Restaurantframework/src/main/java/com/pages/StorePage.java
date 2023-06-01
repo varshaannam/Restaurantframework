@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.utilities.BrowserUtils;
 import com.utilities.WebElementUtils;
 import com.utilities.WebPageutils;
 
@@ -12,51 +13,52 @@ public class StorePage {
 	WebDriver driver;
 	WebElementUtils elementutil = new WebElementUtils();
 	WebPageutils pageutil = new WebPageutils();
+	BrowserUtils browserutil = new BrowserUtils();
+
 	public StorePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 
 	@FindBy(xpath = "//span[text()='Stores']")
-	WebElement storelink;
+	private WebElement storelink;
 	@FindBy(xpath = "//button[@class='btn btn-add btn-lg']")
-	WebElement add_store;
+	private WebElement add_store;
 	@FindBy(xpath = "//input[@id='StoreName']")
-	WebElement store_name;
+	private WebElement store_name;
 	@FindBy(xpath = "//input[@id='email']")
-	WebElement store_email;
+	private WebElement store_email;
 	@FindBy(xpath = "//input[@id='StorePhone']")
-	WebElement store_phone;
+	private WebElement store_phone;
 	@FindBy(xpath = "//input[@id='Country']")
-	WebElement store_country;
+	private WebElement store_country;
 	@FindBy(xpath = "//input[@id='City']")
-	WebElement store_city;
+	private WebElement store_city;
 	@FindBy(xpath = "//input[@id='Adresse']")
-	WebElement store_address;
+	private WebElement store_address;
 	@FindBy(xpath = "//button[@class='btn btn-add']")
 	public WebElement store_submit;
 	@FindBy(xpath = "//input[@class='form-control input-sm']")
-	WebElement store_search;
+	private WebElement store_search;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	WebElement storename_searchresult;
+	private WebElement storename_searchresult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[2]")
-	WebElement storeemail_searchresult;
+	private WebElement storeemail_searchresult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[3]")
-	WebElement storephone_searchresult;
+	private WebElement storephone_searchresult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[4]")
-	WebElement storecountry_searchresult;
+	private WebElement storecountry_searchresult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[5]")
-	WebElement storecity_searchresult;
+	private WebElement storecity_searchresult;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")
-	WebElement storeDelete_Action;
+	private WebElement storeDelete_Action;
 	@FindBy(xpath = "//a[text()='Yes, delete it!']")
-	WebElement productdelete_confirm;
+	private WebElement productdelete_confirm;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	WebElement invalidsearchresult;
+	private WebElement invalidsearchresult;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
-	WebElement Storeedit_action;
+	private WebElement Storeedit_action;
 
-	
 	public boolean isStoreDisplayed() {
 		boolean flag = elementutil.isElementDisplayed(driver, storelink);
 		return flag;
@@ -186,8 +188,10 @@ public class StorePage {
 
 	public void clearActionOnphonenumber() {
 		elementutil.clearTheElement(driver, store_phone);
-		;
+	}
 
+	public void closeTheWindow() {
+		browserutil.quitWindow(driver);
 	}
 
 }

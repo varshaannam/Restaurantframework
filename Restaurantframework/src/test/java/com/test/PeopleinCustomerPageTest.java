@@ -6,11 +6,13 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.base.AutomationBase;
+import com.constants.AutomationConstants;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.PeopleinCustomerPage;
@@ -29,33 +31,31 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 	PropertyUtil propertyutil = new PropertyUtil();
 	BrowserUtils browser = new BrowserUtils();
 
-	@Test(priority = 1, enabled = true)
+	@Test(priority =17, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateElementsOncustomer() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		browser.launchtheURL(driver, prop.getProperty("url"));
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		cpage = hpage.navigateToPeopleinCustomerPage();
 		excelutil = new ExcelUtil();
 		cpage.clickOnCustomersElement();
 		cpage.clickOnAddCustomerElement();
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(cpage.isAddcustomerElementDisplayed(), "Failure message:addcustomer is not displayed");
-		soft.assertTrue(cpage.isNameOfcustomerrDisplayed(), "Failure message:nameofcustomer is not displayed");
-		soft.assertTrue(cpage.isPhonenumberOfcustomerDisplayed(), "Failure message:phonenumber is not displayed");
-		soft.assertTrue(cpage.isEmailOfcustomerDisplayed(), "Failure message:email is not displayed");
-		soft.assertTrue(cpage.isDiscountOfCustomerDisplayed(), "Failure message:discount is not displayed");
+		soft.assertTrue(cpage.isAddcustomerElementDisplayed(), AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(cpage.isNameOfcustomerrDisplayed(), AutomationConstants.LinkDisplayCheck );
+		soft.assertTrue(cpage.isPhonenumberOfcustomerDisplayed(), AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(cpage.isEmailOfcustomerDisplayed(), AutomationConstants.LinkDisplayCheck );
+		soft.assertTrue(cpage.isDiscountOfCustomerDisplayed(), AutomationConstants.LinkDisplayCheck);
 		soft.assertAll();
 
 	}
 
-	@Test(priority = 2, enabled = true)
+	@Test(priority = 18, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateAddcustomerFunctionality() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		browser.launchtheURL(driver, prop.getProperty("url"));
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		cpage = hpage.navigateToPeopleinCustomerPage();
 		excelutil = new ExcelUtil();
@@ -72,24 +72,18 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 		cpage.submitofcustomer();
 		cpage.enterSearchofcustomerElement("customername");
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(cpage.getcustomerrnameFromSearchResults(), "clint",
-				"Failure message:customername is not match");
-		soft.assertEquals(cpage.getcustomerphonenumberFromSearchResults(), "5123445",
-				"Failure message:customeremail is not match");
-		soft.assertEquals(cpage.getcustomereremaileFromSearchResults(), "angel@gmail.com",
-				"Failure message:customerphone is not match");
-		soft.assertEquals(cpage.getDiscountOfcustomerFromSearchResults(), "20",
-				"Failure message:customerdiscount is not match");
+		soft.assertEquals(cpage.getcustomerrnameFromSearchResults(), "clint", AutomationConstants.ErrorMessage);
+		soft.assertEquals(cpage.getcustomerphonenumberFromSearchResults(),"5123445", AutomationConstants.ErrorMessage);
+		soft.assertEquals(cpage.getcustomereremaileFromSearchResults(), "angel@gmail.com", AutomationConstants.ErrorMessage);
+		soft.assertEquals(cpage.getDiscountOfcustomerFromSearchResults(), "20", AutomationConstants.ErrorMessage);
 		soft.assertAll();
-
 	}
 
-	@Test(priority = 3, enabled = true)
+	@Test(priority = 19, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validatedeletcustomerFunctionality() throws IOException {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		browser.launchtheURL(driver, prop.getProperty("url"));
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		cpage = hpage.navigateToPeopleinCustomerPage();
 		excelutil = new ExcelUtil();
@@ -110,12 +104,11 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 		Assert.assertTrue(cpage.isInvalidresultFromSearch());
 	}
 
-	@Test(priority = 4, enabled = true)
+	@Test(priority = 20, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateEditCustomerFunctionality() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		browser.launchtheURL(driver, prop.getProperty("url"));
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		cpage = hpage.navigateToPeopleinCustomerPage();
 		excelutil = new ExcelUtil();
@@ -138,17 +131,16 @@ public class PeopleinCustomerPageTest extends AutomationBase {
 		cpage.submitofcustomer();
 		cpage.enterSearchofcustomerElement(customername4);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(cpage.getcustomerrnameFromSearchResults(), "manu",
-				"Failure message:customername is not match");
-		soft.assertEquals(cpage.getcustomerphonenumberFromSearchResults(), "1012134",
-				"Failure message:customeremail is not match");
-		soft.assertEquals(cpage.getcustomereremaileFromSearchResults(), "rama@gmail.com",
-				"Failure message:customerphone is not match");
-		soft.assertEquals(cpage.getDiscountOfcustomerFromSearchResults(), "40",
-				"Failure message:customerdiscount is not match");
-
+		soft.assertEquals(cpage.getcustomerrnameFromSearchResults(), "manu", AutomationConstants.ErrorMessage);
+		soft.assertEquals(cpage.getcustomerphonenumberFromSearchResults(), "1012134", AutomationConstants.ErrorMessage);
+		soft.assertEquals(cpage.getcustomereremaileFromSearchResults(), "rama@gmail.com",AutomationConstants.ErrorMessage);
+		soft.assertEquals(cpage.getDiscountOfcustomerFromSearchResults(), "40", AutomationConstants.ErrorMessage);
 		soft.assertAll();
 
+	}
+	@AfterMethod
+	public void postRun() {
+		cpage.closeTheWindow();
 	}
 
 }

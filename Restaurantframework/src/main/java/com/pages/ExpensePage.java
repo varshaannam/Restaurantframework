@@ -5,23 +5,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.utilities.BrowserUtils;
 import com.utilities.WaitUtils;
 import com.utilities.WebElementUtils;
 import com.utilities.WebPageutils;
 
-
-
-
 public class ExpensePage {
 	WebDriver driver;
-	WebElementUtils  elementutil = new WebElementUtils();
+	WebElementUtils elementutil = new WebElementUtils();
 	WebPageutils pageutil = new WebPageutils();
 	WaitUtils waitutil = new WaitUtils();
+	BrowserUtils browserutil = new BrowserUtils();
 
 	public ExpensePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
+
 	@FindBy(xpath = "//span[text()='Expense']")
 	WebElement expenselink;
 	@FindBy(xpath = "//button[@class='btn btn-add btn-lg']")
@@ -59,7 +59,7 @@ public class ExpensePage {
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
 	WebElement invalidsearchresult;
 
-		public void clickOnAddexpenseElement() {
+	public void clickOnAddexpenseElement() {
 		elementutil.clickOnElement(driver, addexpense);
 		waitutil.presenceOfElementLocated(driver, addexpense, 5);
 	}
@@ -98,7 +98,7 @@ public class ExpensePage {
 
 	public void submitofexpense() {
 		elementutil.clickOnElement(driver, expenseSubmit);
-		waitutil.ElementTobeClickable(driver,expenseSubmit , 5);
+		waitutil.ElementTobeClickable(driver, expenseSubmit, 5);
 	}
 
 	public void clickOnExpenseElement() {
@@ -107,7 +107,7 @@ public class ExpensePage {
 
 	public void clickOnAddExpenseElement() {
 		elementutil.clickOnElement(driver, addexpense);
-		waitutil.ElementTobeClickable(driver, addexpense,10);
+		waitutil.ElementTobeClickable(driver, addexpense, 10);
 	}
 
 	public void enterDateofExpense(String name) {
@@ -189,9 +189,11 @@ public class ExpensePage {
 
 	public void clearActionOnexpenserdate() {
 		elementutil.clearTheElement(driver, expenseDate);
-		;
 
 	}
 
-}
+	public void closeTheWindow() {
+		browserutil.quitWindow(driver);
+	}
 
+}

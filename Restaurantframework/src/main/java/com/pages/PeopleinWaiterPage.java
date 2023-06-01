@@ -5,20 +5,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.utilities.BrowserUtils;
 import com.utilities.WaitUtils;
 import com.utilities.WebElementUtils;
 import com.utilities.WebPageutils;
 
 public class PeopleinWaiterPage {
 	WebDriver driver;
-
 	WebElementUtils elementutil = new WebElementUtils();
 	WaitUtils waitutil = new WaitUtils();
 	WebPageutils pageutil = new WebPageutils();
+	BrowserUtils browserutil = new BrowserUtils();
+
 	public PeopleinWaiterPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
+
 	@FindBy(xpath = "//span[text()='People']")
 	WebElement peoplelink;
 	@FindBy(xpath = "//span[text()='Waiters']")
@@ -153,8 +156,11 @@ public class PeopleinWaiterPage {
 
 	public void clearActionOnwaiterphonenumber() {
 		elementutil.clearTheElement(driver, waiter_phone);
-		;
 
+	}
+
+	public void closeTheWindow() {
+		browserutil.quitWindow(driver);
 	}
 
 }

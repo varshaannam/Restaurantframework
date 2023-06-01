@@ -5,11 +5,13 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.base.AutomationBase;
+import com.constants.AutomationConstants;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.StorePage;
@@ -24,37 +26,32 @@ public class StorePageTest extends AutomationBase {
 	HomePage hpage;
 	StorePage spage;
 	Properties prop;
-	WaitUtils wait;
 	ExcelUtil excelutil;
 	PropertyUtil propertyutil = new PropertyUtil();
 	BrowserUtils browser = new BrowserUtils();
 
-	@Test(priority = 1, enabled = true, groups = { "Smoke" })
+	@Test(priority = 10, enabled = true, groups = { "Smoke" }, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateElementsOnStore() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		excelutil = new ExcelUtil();
-		wait = new WaitUtils();
-		wait.implicitwait(driver, 30);
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		spage = hpage.navigateTostorePage();
 		spage.clickOnAddStore();
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(spage.isStoreEmailDisplayed(), "Failure message:storeemail is not displayed");
-		soft.assertTrue(spage.isStorePhoneDisplayed(), "Failure message:storephone is not displayed");
-		soft.assertTrue(spage.isStoreCountryDisplayed(), "Failure message:storecountry is not displayed");
-		soft.assertTrue(spage.isStoreCityDisplayed(), "Failure message:storecity is not displayed");
-		soft.assertTrue(spage.isStoreAddressDisplayed(), "Failure message:storeaddressr is not displayed");
+		soft.assertTrue(spage.isStoreEmailDisplayed(), AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(spage.isStorePhoneDisplayed(), AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(spage.isStoreCountryDisplayed(), AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(spage.isStoreCityDisplayed(), AutomationConstants.LinkDisplayCheck);
+		soft.assertTrue(spage.isStoreAddressDisplayed(), AutomationConstants.LinkDisplayCheck);
 		soft.assertAll();
 	}
 
-	@Test(priority = 2, enabled = true, groups = { "Smoke" })
+	@Test(priority = 11, enabled = true, groups = { "Smoke" }, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateAddStoreFunctionality() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		excelutil = new ExcelUtil();
-		wait = new WaitUtils();
-		wait.implicitwait(driver, 30);
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		spage = hpage.navigateTostorePage();
 		spage.clickOnAddStore();
@@ -73,31 +70,23 @@ public class StorePageTest extends AutomationBase {
 		spage.Storesubmit();
 		String st = spage.StoreSearch(storename);
 		SoftAssert soft = new SoftAssert();
-		soft.assertEquals(spage.getStorenameFromSearchResults(), "ALFA", "Failure message:storename is not match");
+		soft.assertEquals(spage.getStorenameFromSearchResults(), "ALFA", AutomationConstants.ErrorMessage);
 		soft.assertEquals(spage.getStoreemaileFromSearchResults(), "abcdef@gmail.com",
-				"Failure message:storeemail is not match");
-		soft.assertEquals(spage.getStorephonenumberFromSearchResults(), "12121212",
-				"Failure message:storephoneis not match");
-		soft.assertEquals(spage.getStorecountryFromSearchResults(), "india",
-				"Failure message:storecountry is not match");
-		soft.assertEquals(spage.getStorecityFromSearchResults(), "ijk", "Failure message:storecityis not match");
-		// soft.assertEquals(ppage.getProductPriceFromSearchResults(),"20000","Failure
-		// message:productprice is not match");
+				AutomationConstants.ErrorMessage);
+		soft.assertEquals(spage.getStorephonenumberFromSearchResults(), "12121212", AutomationConstants.ErrorMessage);
+		soft.assertEquals(spage.getStorecountryFromSearchResults(), "india", AutomationConstants.ErrorMessage);
+		soft.assertEquals(spage.getStorecityFromSearchResults(), "ijk", AutomationConstants.ErrorMessage);
 		soft.assertAll();
 	}
 
-	@Test(priority = 3, enabled = true)
+	@Test(priority = 12, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateDeleteActionOnStore() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		excelutil = new ExcelUtil();
-		wait = new WaitUtils();
-		wait.implicitwait(driver, 30);
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		spage = hpage.navigateTostorePage();
 		spage.clickOnAddStore();
-
-		// spage.clickOnAddStore();
 		String storename = excelutil.readStringData("store", 7, 2);
 		spage.enterNameOfStore(storename);
 		String storemail = excelutil.readStringData("store", 8, 2);
@@ -114,21 +103,17 @@ public class StorePageTest extends AutomationBase {
 		String st = spage.StoreSearch(storename);
 		spage.deleteActionOnstore();
 		spage.deleteConfirmationOnStore();
-		// wait.waitForElementTobeClickable(driver, element, timeunit);
 		Assert.assertTrue(spage.isInvalidresultFromSearch());
 	}
 
-	@Test(priority = 4, enabled = true)
+	@Test(priority = 13, enabled = true,retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateEditActionOnStore() {
 		lpage = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
 		excelutil = new ExcelUtil();
-		wait = new WaitUtils();
-		wait.implicitwait(driver, 30);
 		hpage = lpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		spage = hpage.navigateTostorePage();
 		spage.clickOnAddStore();
-
 		String storename = excelutil.readStringData("store", 13, 2);
 		spage.enterNameOfStore(storename);
 		String storemail = excelutil.readStringData("store", 14, 2);
@@ -145,11 +130,26 @@ public class StorePageTest extends AutomationBase {
 		String st = spage.StoreSearch(storename);
 		spage.storeEditAction();
 		spage.clearActionOnstorename();
-		spage.enterNameOfStore("booster");
+		String editstorename = excelutil.readStringData("store", 19, 2);
+		spage.enterNameOfStore(editstorename);
 		spage.clearActionOnphonenumber();
-		spage.enterPhonenumberOfStore("11111111");
+		String editphone = excelutil.readStringData("store", 20, 2);
+		spage.enterPhonenumberOfStore(editphone);
 		spage.Storesubmit();
-		wait.presenceOfElementLocated(driver, spage.store_submit, 30);
+		spage.StoreSearch(storename);
+		SoftAssert soft = new SoftAssert();
+		soft.assertEquals(spage.getStorenameFromSearchResults(), "mcp store", AutomationConstants.ErrorMessage);
+		soft.assertEquals(spage.getStoreemaileFromSearchResults(), "abcdef@gmail.com",
+				AutomationConstants.ErrorMessage);
+		soft.assertEquals(spage.getStorephonenumberFromSearchResults(), "12121212", AutomationConstants.ErrorMessage);
+		soft.assertEquals(spage.getStorecountryFromSearchResults(), "india", AutomationConstants.ErrorMessage);
+		soft.assertEquals(spage.getStorecityFromSearchResults(), "ijk", AutomationConstants.ErrorMessage);
+		soft.assertAll();
 
+	}
+
+	@AfterMethod
+	public void postRun() {
+		spage.closeTheWindow();
 	}
 }
