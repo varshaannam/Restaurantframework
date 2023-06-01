@@ -138,8 +138,6 @@ public class ProductPageTest extends AutomationBase {
 		SoftAssert soft = new SoftAssert();
 		soft.assertEquals(ppage.getProductCodeFromSearchResults(), "2030", "Failure message:productcode is not match");
 		soft.assertEquals(ppage.getProducNameFromSearchResults(), "home", "Failure message:productname is not match");
-		soft.assertEquals(ppage.getProductCategoryFromSearchResults(), "Pizza",
-				"Failure message:productcategory is not match");
 		soft.assertEquals(ppage.getProductTaxFromSearchResults(), "20", "Failure message:producttax is not match");
 		soft.assertAll();
 

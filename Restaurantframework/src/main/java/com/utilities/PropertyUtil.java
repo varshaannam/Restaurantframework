@@ -30,9 +30,9 @@ public class PropertyUtil {
 			}
 
 		}
-		System.out.println("url is :" + prop.getProperty("url"));
-		System.out.println("username is :" + prop.getProperty("username"));
-		System.out.println("password is :" + prop.getProperty("password"));
+		//System.out.println("url is :" + prop.getProperty("url"));
+		//System.out.println("username is :" + prop.getProperty("username"));
+		//System.out.println("password is :" + prop.getProperty("password"));
 		return prop;
 
 	}

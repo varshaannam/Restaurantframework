@@ -19,73 +19,73 @@ public class ProductPage {
 		PageFactory.initElements(driver, this);
 	}
 	@FindBy(xpath = "//span[text()='Product']")
-	WebElement productlink;
+	private WebElement productlink;
 	@FindBy(xpath = "//button[text()='Add Product']")
-	WebElement addProduct;
+	private WebElement addProduct;
 	@FindBy(xpath = "//select[@id='Type']")
-	WebElement producttype;
+	private WebElement producttype;
 	@FindBy(xpath = "//input[@id='ProductCode']")
-	WebElement productcode;
+	private WebElement productcode;
 	@FindBy(xpath = "//input[@id='ProductName']")
-	WebElement productname;
+	private WebElement productname;
 	@FindBy(xpath = "//select[@id='Category']")
-	WebElement productcategory;
+	private WebElement productcategory;
 	@FindBy(xpath = "//select[@name='supplier']")
-	WebElement productsupplier;
+	private WebElement productsupplier;
 	@FindBy(xpath = "//input[@id='PurchasePrice']")
-	WebElement productpurchaseprice;
+	private WebElement productpurchaseprice;
 	@FindBy(xpath = "//input[@id='Tax']")
-	WebElement producttax;
+	private WebElement producttax;
 	@FindBy(xpath = "//select[@id='taxType']")
-	WebElement producttaxMethod;
+	private WebElement producttaxMethod;
 	@FindBy(xpath = "//input[@id='Price']")
-	WebElement productprice;
+	private WebElement productprice;
 	@FindBy(xpath = "//input[@id='Unit']")
-	WebElement productunit;
+	private WebElement productunit;
 	@FindBy(xpath = "//input[@id='AlertQt']")
-	WebElement productAlertquantity;
+	private WebElement productAlertquantity;
 	@FindBy(xpath = "//textarea[@id='ProductOptions']")
-	WebElement productOptions;
+	private WebElement productOptions;
 	@FindBy(xpath = "")
-	WebElement productimageinput;
+	private WebElement productimageinput;
 	@FindBy(xpath = "//div[@class='note-editable panel-body']")
-	WebElement productDescription;
+	private WebElement productDescription;
 	@FindBy(xpath = "//label[@class='btn color02 active']")
-	WebElement productColour;
+	private WebElement productColour;
 	@FindBy(xpath = "//button[text()='Submit'][1]")
-	WebElement productSubmit;
+	private WebElement productSubmit;
 	@FindBy(xpath = "(//button[text()='Close'])[5]")
-	public WebElement storeclose;
+	private  WebElement storeclose;
 	@FindBy(xpath = "//input[@type='search']")
-	WebElement productSearch;
+	private WebElement productSearch;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	WebElement productcode_searchresult;
+	private WebElement productcode_searchresult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[2]")
-	WebElement productname_searchresult;
+	private WebElement productname_searchresult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[3]")
-	WebElement productcategory_searchresult;
+	private WebElement productcategory_searchresult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[5]")
-	WebElement producttax_searchresult;
+	private WebElement producttax_searchresult;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[6]")
-	WebElement producprice_searchresult;
+	private WebElement producprice_searchresult;
 	@FindBy(xpath = "(//input[@id='quantity'])[1]")
-	WebElement MNCstore_Quantity;
+	private WebElement MNCstore_Quantity;
 	@FindBy(xpath = "(//input[@id='pricestr'])[1]")
-	WebElement MNCstore_price;
-	@FindBy(xpath = "//body/div[@id='stock']/div[@id='stockModal']/div[1]/div[3]/button[2]")
-	public WebElement Storesubmit;
+	private WebElement MNCstore_price;
+	@FindBy(xpath = "(//button[@class='btn btn-add hiddenpr'])[2]")
+	private WebElement Storesubmit;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[1]")
-	WebElement Productdelete_action;
+	private WebElement Productdelete_action;
 	@FindBy(xpath = "//a[text()='Yes, delete it!']")
-	public WebElement productdelete_confirm;
+	private  WebElement productdelete_confirm;
 	@FindBy(xpath = "//i[@class='fa fa-file-text']")
-	public WebElement Productview_action;
+	private  WebElement Productview_action;
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[3]")
-	WebElement Productedit_action;
+	private WebElement Productedit_action;
 	@FindBy(xpath = "(//i[@class='fa fa-tasks'])[1]")
-	WebElement modifyStock_action;
+	private WebElement modifyStock_action;
 	@FindBy(xpath = "(//table[@id='Table']//tr//td)[1]")
-	WebElement invalidsearchresult;
+	private WebElement invalidsearchresult;
 	public void implementImplicitWait() {
 		waitutil.implicitwait(driver, 5);
 	}

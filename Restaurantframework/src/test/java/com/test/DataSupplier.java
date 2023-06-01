@@ -6,7 +6,7 @@ import com.utilities.ExcelUtil;
 
 
 public class DataSupplier {
-	ExcelUtil	excelutil = new ExcelUtil();
+	ExcelUtil  excelutil = new ExcelUtil();
 
 	@DataProvider(name="waiter")
 	public Object[][] datasupplierwaiter() {

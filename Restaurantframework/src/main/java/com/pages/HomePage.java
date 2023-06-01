@@ -19,27 +19,27 @@ public class HomePage {
 	}
 
 	@FindBy(xpath = "//span[text()='POS']")
-	WebElement poslink;
+	private WebElement poslink;
 	@FindBy(xpath = "//span[text()='Product']")
-	WebElement productlink;
+	private WebElement productlink;
 	@FindBy(xpath = "//span[text()='Stores']")
-	WebElement storelink;
+	private WebElement storelink;
 	@FindBy(xpath = "//span[text()='People']")
-	WebElement peoplelink;
+	private WebElement peoplelink;
 	@FindBy(xpath = "//span[text()='Sales']")
-	WebElement saleslink;
+	private WebElement saleslink;
 	@FindBy(xpath = "//span[text()='Expense']")
-	WebElement expenselink;
+	private WebElement expenselink;
 	@FindBy(xpath = "//span[text()='Categories ']")
-	WebElement categorieslink;
+	private WebElement categorieslink;
 	@FindBy(xpath = "//span[text()='Setting']")
-	WebElement settinglink;
+	private WebElement settinglink;
 	@FindBy(xpath = "//span[text()='Reports']")
-	WebElement reportlink;
+	private WebElement reportlink;
 	@FindBy(xpath = "//li[@class='dropdown language']")
-	WebElement language;
+	private WebElement language;
 	@FindBy(xpath = "//i[@class='fa fa-sign-out fa-lg']")
-	WebElement logout;
+	private WebElement logout;
 
 	/**
 	 * This method is to check whether elements are displayed
